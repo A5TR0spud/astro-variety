@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "E E",
+    "E E"
+  ],
+  "key": {
+    "E": {
+      "item": "astrovariety:compact_sugar_cane"
+    }
+  },
+  "result": {
+    "item": "astrovariety:cane_leggings"
+  }
+}

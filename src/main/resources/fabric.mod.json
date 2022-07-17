@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "astrovariety",
+  "version": "${version}",
+
+  "name": "Astro's Variety Mod",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "A5TR0spud"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/astrovariety/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.astrospud.astrovariety.AstroVariety"
+    ]
+  },
+  "mixins": [
+    "modid.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

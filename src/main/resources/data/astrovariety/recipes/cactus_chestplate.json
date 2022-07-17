@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C C",
+    "CLC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:cactus"
+    },
+    "L": {
+      "item": "minecraft:leather_chestplate"
+    }
+  },
+  "result": {
+    "item": "astrovariety:cactus_chestplate"
+  }
+}

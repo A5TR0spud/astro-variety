@@ -1,0 +1,19 @@
+{
+  "item.astrovariety.ember_ingot": "Ember Ingot",
+  "item.astrovariety.blaze_hat": "Blaze Hat",
+  "item.astrovariety.blaze_boots": "Blaze Boots",
+
+  "item.astrovariety.cactus_chestplate": "Cactus Tunic",
+
+  "item.astrovariety.compact_sugar_cane": "Compact Sugar Cane",
+  "item.astrovariety.cane_boots": "Cane Boots",
+  "item.astrovariety.cane_leggings": "Cane Leggings",
+
+  "item.astrovariety.golem_helmet": "Golem Helmet",
+  "item.astrovariety.golem_chestplate": "Golem Chestplate",
+
+  "tooltip.astrovariety.cactus_armor": "Prickly",
+  "tooltip.astrovariety.blaze": "Fire Resilient",
+  "tooltip.astrovariety.cane": "Speedy",
+  "tooltip.astrovariety.golem": "Defensible"
+}
