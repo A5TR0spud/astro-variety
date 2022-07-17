@@ -32,27 +32,24 @@ public abstract class AVLivingEntityMixin extends Entity {
         super(entityType, world);
     }
 
-    @Inject(at = @At(value = "HEAD"), method = "damage")
+    @Inject(at = @At(value = "HEAD"), method = "damage", cancellable = true)
     public void avdamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
-        Iterable<ItemStack> armorItems = this.getArmorItems();
-        ArrayList<ItemStack> armor = new ArrayList<>();
-        armorItems.forEach(armor::add);
-
-        //cactus
-        if (source.getAttacker() instanceof LivingEntity attacker) {
-            int strength = 0;
-            if (armor.get(2).getItem() == AVItems.CACTUS_CHESTPLATE) { strength++; }
-            if (strength > 0) {
-                attacker.damage(DamageSource.CACTUS, strength);
-            }
-        }
-    }
-
-    @ModifyVariable(at = @At("HEAD"), ordinal = 0, method = "damage")
-    public float avdamagevar(float finalAmount, DamageSource source, float amount){
         if ((Object) this instanceof LivingEntity liveEntity) {
             Iterable<ItemStack> armorItems = this.getArmorItems();
             ArrayList<ItemStack> armor = new ArrayList<>();
+            armorItems.forEach(armor::add);
+
+            //cactus
+            if (source.getAttacker() instanceof LivingEntity attacker) {
+                int strength = 0;
+                if (armor.get(2).getItem() == AVItems.CACTUS_CHESTPLATE) {
+                    strength++;
+                }
+                if (strength > 0) {
+                    attacker.damage(DamageSource.CACTUS, strength);
+                }
+            }
+
             armorItems.forEach(armor::add);
             //blaze
             float res = 0;
@@ -60,7 +57,7 @@ public abstract class AVLivingEntityMixin extends Entity {
             if (armor.get(0).getItem() == AVItems.BLAZE_BOOTS) {
                 res++;
                 if (Objects.equals(source.getName(), "hotFloor")) {
-                    return 0;
+                    cir.setReturnValue(false);
                 }
             }
             if (armor.get(3).getItem() == AVItems.BLAZE_HAT) {
@@ -71,10 +68,9 @@ public abstract class AVLivingEntityMixin extends Entity {
             }
             boolean doRes = this.getWorld().random.nextFloat() > 0.5F * (res / resMax);
             if (res > 0 && source.isFire() && doRes && !liveEntity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE)) {
-                return 0;
+                cir.setReturnValue(false);
             }
         }
-        return finalAmount;
     }
 
     @Inject(at = @At(value = "HEAD"), method = "tick")

@@ -12,8 +12,14 @@
   "item.astrovariety.golem_helmet": "Golem Helmet",
   "item.astrovariety.golem_chestplate": "Golem Chestplate",
 
+  "item.astrovariety.talisman_of_decay": "Talisman of Decay",
+
   "tooltip.astrovariety.cactus_armor": "Prickly",
   "tooltip.astrovariety.blaze": "Fire Resilient",
   "tooltip.astrovariety.cane": "Speedy",
-  "tooltip.astrovariety.golem": "Defensible"
+  "tooltip.astrovariety.golem": "Defensible",
+  "tooltip.astrovariety.decay_desc_1": "Decay exists as an",
+  "tooltip.astrovariety.decay_desc_2": "   extant form of life",
+  "tooltip.astrovariety.decay_quote_1": "\"You cannot kill me in",
+  "tooltip.astrovariety.decay_quote_2": "   a way that matters\""
 }

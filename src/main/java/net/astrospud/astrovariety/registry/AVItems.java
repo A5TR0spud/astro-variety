@@ -52,6 +52,10 @@ public class AVItems {
                     new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1),
                     0x666666, "tooltip.astrovariety.golem", Formatting.GRAY));
 
+    //misc
+    public static final Item TALISMAN_OF_DECAY = registerItem("talisman_of_decay",
+            new DecayItem(new FabricItemSettings().group(ItemGroup.TOOLS).fireproof()));
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(AstroVariety.MOD_ID, name), item);
     }
