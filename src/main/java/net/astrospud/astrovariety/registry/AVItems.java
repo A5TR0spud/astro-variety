@@ -1,6 +1,10 @@
 package net.astrospud.astrovariety.registry;
 
 import net.astrospud.astrovariety.AstroVariety;
+import net.astrospud.astrovariety.classes.AVArmorMaterials;
+import net.astrospud.astrovariety.classes.SpecialArmorItem;
+import net.astrospud.astrovariety.classes.SpecialItem;
+import net.astrospud.astrovariety.classes.TalismanItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
@@ -46,15 +50,18 @@ public class AVItems {
     public static final Item GOLEM_HELMET = registerItem("golem_helmet",
             new SpecialArmorItem(AVArmorMaterials.GOLEM, EquipmentSlot.HEAD,
                     new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1),
-                    0x666666, "tooltip.astrovariety.golem", Formatting.GRAY));
+                    0xaaaaaa, "tooltip.astrovariety.golem", Formatting.GRAY));
     public static final Item GOLEM_CHESTPLATE = registerItem("golem_chestplate",
             new SpecialArmorItem(AVArmorMaterials.GOLEM, EquipmentSlot.CHEST,
                     new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1),
-                    0x666666, "tooltip.astrovariety.golem", Formatting.GRAY));
+                    0xaaaaaa, "tooltip.astrovariety.golem", Formatting.GRAY));
 
-    //misc
+    //talismans
     public static final Item TALISMAN_OF_DECAY = registerItem("talisman_of_decay",
-            new DecayItem(new FabricItemSettings().group(ItemGroup.TOOLS).fireproof()));
+            new TalismanItem("decay")); //decay exists as an extant form of life... you cannot kill me in a way that matters
+
+    //public static final Item TALISMAN_OF_ = registerItem("talisman_of_",
+            //new TalismanItem("")); //failure is the opportunity to begin again... don’t die just yet
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(AstroVariety.MOD_ID, name), item);
