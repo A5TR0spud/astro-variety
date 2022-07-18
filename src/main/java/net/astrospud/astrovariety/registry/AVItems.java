@@ -1,10 +1,10 @@
 package net.astrospud.astrovariety.registry;
 
 import net.astrospud.astrovariety.AstroVariety;
-import net.astrospud.astrovariety.classes.AVArmorMaterials;
-import net.astrospud.astrovariety.classes.SpecialArmorItem;
-import net.astrospud.astrovariety.classes.SpecialItem;
-import net.astrospud.astrovariety.classes.TalismanItem;
+import net.astrospud.astrovariety.types.AVArmorMaterials;
+import net.astrospud.astrovariety.types.SpecialArmorItem;
+import net.astrospud.astrovariety.types.SpecialItem;
+import net.astrospud.astrovariety.types.TalismanItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
