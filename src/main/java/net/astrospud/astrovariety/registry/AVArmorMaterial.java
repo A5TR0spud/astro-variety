@@ -1,6 +1,6 @@
-package net.astrospud.astrovariety.types;
+package net.astrospud.astrovariety.registry;
 
-import net.astrospud.astrovariety.registry.AVItems;
+import net.astrospud.astrovariety.types.AVLazy;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Items;
@@ -10,7 +10,7 @@ import net.minecraft.sound.SoundEvents;
 
 import java.util.function.Supplier;
 
-public enum AVArmorMaterials implements ArmorMaterial{
+public enum AVArmorMaterial implements ArmorMaterial{
     BLAZE("blaze", 9, new int[]{1, 3, 5, 2}, 25,
             SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F, 0.0F, () -> {
         return Ingredient.ofItems(AVItems.EMBER_INGOT);
@@ -26,7 +26,7 @@ public enum AVArmorMaterials implements ArmorMaterial{
     GOLEM("golem", 16, new int[]{2, 5, 6, 2}, 9, SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 0.0F, 0.0F, () -> {
         return Ingredient.ofItems(Items.IRON_BLOCK);
     }),
-    SEER("seer", 7, new int[]{1, 1, 1, 2}, 9, SoundEvents.ENTITY_IRON_GOLEM_REPAIR, 0.0F, 0.0F, () -> {
+    SEER("seer", 10, new int[]{0, 0, 0, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, 0.0F, () -> {
         return Ingredient.ofItems(Items.IRON_BLOCK);
     });
 
@@ -38,9 +38,9 @@ public enum AVArmorMaterials implements ArmorMaterial{
     private final SoundEvent equipSound;
     private final float toughness;
     private final float knockbackResistance;
-    private final AVLazy repairIngredientSupplier;
+    private final AVLazy<Ingredient> repairIngredientSupplier;
 
-    private AVArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantability, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier repairIngredientSupplier) {
+    private AVArmorMaterial(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantability, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredientSupplier) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.protectionAmounts = protectionAmounts;
@@ -48,7 +48,7 @@ public enum AVArmorMaterials implements ArmorMaterial{
         this.equipSound = equipSound;
         this.toughness = toughness;
         this.knockbackResistance = knockbackResistance;
-        this.repairIngredientSupplier = new AVLazy(repairIngredientSupplier);
+        this.repairIngredientSupplier = new AVLazy<>(repairIngredientSupplier);
     }
 
     public int getDurability(EquipmentSlot slot) {
@@ -68,7 +68,7 @@ public enum AVArmorMaterials implements ArmorMaterial{
     }
 
     public Ingredient getRepairIngredient() {
-        return (Ingredient)this.repairIngredientSupplier.get();
+        return this.repairIngredientSupplier.get();
     }
 
     public String getName() {

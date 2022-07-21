@@ -12,12 +12,17 @@
   "item.astrovariety.golem_helmet": "Golem Helmet",
   "item.astrovariety.golem_chestplate": "Golem Chestplate",
 
+  "item.astrovariety.seer_helmet": "Helm of the Everseer",
+  "item.astrovariety.sword_of_leaping": "Sword of Leaping",
+
   "item.astrovariety.talisman_of_decay": "Talisman of Decay",
 
   "tooltip.astrovariety.cactus_armor": "Prickly",
   "tooltip.astrovariety.blaze": "Fire Resilient",
   "tooltip.astrovariety.cane": "Speedy",
   "tooltip.astrovariety.golem": "Defensible",
+  "tooltip.astrovariety.seer": "All-seeing",
+
   "tooltip.astrovariety.decay_desc_1": "Decay exists as an",
   "tooltip.astrovariety.decay_desc_2": "   extant form of life",
   "tooltip.astrovariety.decay_quote_1": "\"You cannot kill me in",

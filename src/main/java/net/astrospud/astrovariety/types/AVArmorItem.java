@@ -12,25 +12,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class SpecialArmorItem extends ArmorItem {
+public class AVArmorItem extends ArmorItem {
 
     private int COLOR = -1;
     private String KEY = "";
     private Formatting FORMAT = Formatting.WHITE;
 
-    public SpecialArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings,
-                            int color, String tooltipKey, Formatting format) {
+    public AVArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings,
+                       int color, String tooltipKey, Formatting format) {
         super(material, slot, settings);
         COLOR = color;
         KEY = tooltipKey;
         FORMAT = format;
-    }
-    public SpecialArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings, int color) {
-        super(material, slot, settings);
-        COLOR = color;
-    }
-    public SpecialArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
-        super(material, slot, settings);
     }
 
     @Override

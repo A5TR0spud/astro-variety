@@ -12,6 +12,8 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,6 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -90,8 +93,7 @@ public abstract class AVLivingEntityMixin extends Entity {
 
 
     @ModifyVariable(at = @At("HEAD"), ordinal = 0, method = "damage")
-    public float avVarDamageMixin(float finalAmount, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        finalAmount = amount;
+    public float avVarDamageMixin(float finalAmount, DamageSource source, float amount) {
         if ((Object) this instanceof PlayerEntity entity && HAS_DECAY) {
             finalAmount = (float)Math.ceil(finalAmount * 0.75);
         }
@@ -127,8 +129,19 @@ public abstract class AVLivingEntityMixin extends Entity {
                         HEALTH, EntityAttributeModifier.Operation.ADDITION);
                 ReplaceAttributeModifier(att, mod);
             }
-            //talismans
+
             if (entity instanceof PlayerEntity player) {
+                Iterable<ItemStack> armorItems = entity.getArmorItems();
+                ArrayList<ItemStack> armor = new ArrayList<>();
+                armorItems.forEach(armor::add);
+                //everseer
+                //List<Entity> list = world.getOtherEntities(player, new Box(player.getX()-50, player.getY()-50, player.getZ()-50, player.getX()+50, player.getY()+50, player.getZ()+50));
+                //for(int v = 0; v < list.size(); ++v) {
+                    //Entity e = (Entity) list.get(v);
+                if (armor.get(3).getItem() == AVItems.SEER_HELMET) {
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 2, 0, true, false, false));
+                }
+
                 //talisman of decay
                 for (int i = 0; i < player.getInventory().size(); i++) {
                     if (player.getInventory().getStack(i).getItem() == AVItems.TALISMAN_OF_DECAY) {
