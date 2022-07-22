@@ -23,6 +23,8 @@
   "tooltip.astrovariety.golem": "Defensible",
   "tooltip.astrovariety.seer": "All-seeing",
 
+  "tooltip.astrovariety.right_click": "Right-clickable",
+
   "tooltip.astrovariety.decay_desc_1": "Decay exists as an",
   "tooltip.astrovariety.decay_desc_2": "   extant form of life",
   "tooltip.astrovariety.decay_quote_1": "\"You cannot kill me in",
