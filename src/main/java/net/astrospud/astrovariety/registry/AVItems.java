@@ -1,10 +1,7 @@
 package net.astrospud.astrovariety.registry;
 
 import net.astrospud.astrovariety.AstroVariety;
-import net.astrospud.astrovariety.types.AVArmorItem;
-import net.astrospud.astrovariety.types.SpecialItem;
-import net.astrospud.astrovariety.types.SwordOfLeapingItem;
-import net.astrospud.astrovariety.types.TalismanItem;
+import net.astrospud.astrovariety.types.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
@@ -63,6 +60,8 @@ public class AVItems {
                     0x33aaaa, "tooltip.astrovariety.seer", Formatting.DARK_AQUA));
     public static final Item SWORD_OF_LEAPING = registerItem("sword_of_leaping",
             new SwordOfLeapingItem(AVToolMaterial.SEER, new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
+    public static final Item ARROW_GATLER = registerItem("arrow_gatler",
+            new ArrowGatlerItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
         /*public SeerHelmetArmorItem() {
     super(AVArmorMaterials.SEER, EquipmentSlot.HEAD,
             new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).fireproof().maxDamage(0),
