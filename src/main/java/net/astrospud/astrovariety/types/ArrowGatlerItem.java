@@ -33,7 +33,7 @@ public class ArrowGatlerItem extends RangedWeaponItem implements Vanishable{
         if (!world.isClient) {
             world.playSound((PlayerEntity) null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.3F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         }
-        ItemStack stack= user.getStackInHand(hand);
+        ItemStack stack = user.getStackInHand(hand);
 
         user.getItemCooldownManager().set(this, 7);
 
