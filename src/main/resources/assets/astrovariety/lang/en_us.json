@@ -1,4 +1,9 @@
 {
+  "item.astrovariety.charged_rose_gold_helmet": "Charged Rose Gold Helmet",
+  "item.astrovariety.charged_rose_gold_chestplate": "Charged Rose Gold Chestplate",
+  "item.astrovariety.charged_rose_gold_leggings": "Charged Rose Gold Leggings",
+  "item.astrovariety.charged_rose_gold_boots": "Charged Rose Gold Boots",
+
   "item.astrovariety.ember_ingot": "Ember Ingot",
   "item.astrovariety.blaze_hat": "Blaze Hat",
   "item.astrovariety.blaze_boots": "Blaze Boots",
@@ -16,6 +21,12 @@
   "item.astrovariety.sword_of_leaping": "Sword of Leaping",
 
   "item.astrovariety.talisman_of_decay": "Talisman of Decay",
+
+  "item.astrovariety.arrow_gatler": "Arrow Gatler",
+
+  "tooltip.astrovariety.modespeed": "Mode: Speed",
+  "tooltip.astrovariety.modejump": "Mode: Jumpheight",
+  "tooltip.astrovariety.modestep": "Mode: Stepheight",
 
   "tooltip.astrovariety.cactus_armor": "Prickly",
   "tooltip.astrovariety.blaze": "Fire Resilient",

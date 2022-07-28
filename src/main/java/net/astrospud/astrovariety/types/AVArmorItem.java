@@ -26,6 +26,12 @@ public class AVArmorItem extends ArmorItem {
         FORMAT = format;
     }
 
+    public AVArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings,
+                       int color) {
+        super(material, slot, settings);
+        COLOR = color;
+    }
+
     @Override
     public int getItemBarColor(ItemStack stack) {
         if (COLOR >= 0) {

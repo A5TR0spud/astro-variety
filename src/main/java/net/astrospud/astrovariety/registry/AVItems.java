@@ -10,6 +10,23 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class AVItems {
+    //rose gold
+    public static final Item ROSE_GOLD_HELMET = registerItem("charged_rose_gold_helmet",
+            new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.HEAD,
+                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1),
+                    0xff3333));
+    public static final Item ROSE_GOLD_CHESTPLATE = registerItem("charged_rose_gold_chestplate",
+            new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.CHEST,
+                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1),
+                    0xff3333));
+    public static final Item ROSE_GOLD_LEGGINGS = registerItem("charged_rose_gold_leggings",
+            new RoseGoldLeggingsArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.LEGS,
+                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1),
+                    0xff3333));
+    public static final Item ROSE_GOLD_BOOTS = registerItem("charged_rose_gold_boots",
+            new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.FEET,
+                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1),
+                    0xff3333));
 
     //blaze
     public static final Item EMBER_INGOT = registerItem("ember_ingot",
@@ -61,8 +78,8 @@ public class AVItems {
     public static final Item SWORD_OF_LEAPING = registerItem("sword_of_leaping",
             new SwordOfLeapingItem(AVToolMaterial.SEER, new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
     public static final Item ARROW_GATLER = registerItem("arrow_gatler",
-            new ArrowGatlerItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
-        /*public SeerHelmetArmorItem() {
+            new ArrowGatlerItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(649)));
+    /*public SeerHelmetArmorItem() {
     super(AVArmorMaterials.SEER, EquipmentSlot.HEAD,
             new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).fireproof().maxDamage(0),
             0x33aaaa, "tooltip.astrovariety.seer", Formatting.DARK_AQUA);

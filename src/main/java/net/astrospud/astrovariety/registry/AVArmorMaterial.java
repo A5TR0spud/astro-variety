@@ -28,6 +28,9 @@ public enum AVArmorMaterial implements ArmorMaterial{
     }),
     SEER("seer", 10, new int[]{0, 0, 0, 3}, 9, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, 0.0F, () -> {
         return Ingredient.ofItems(Items.IRON_BLOCK);
+    }),
+    CHARGED_ROSE_GOLD("charged_rose_gold", 25, new int[]{2, 4, 5, 2}, 20, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F, 0.0F, () -> {
+        return null;
     });
 
     private static final int[] BASE_DURABILITY = new int[]{13, 15, 16, 11};

@@ -23,19 +23,16 @@ import java.util.function.Predicate;
 
 import static net.minecraft.item.RangedWeaponItem.BOW_PROJECTILES;
 
-public class ArrowGatlerItem extends RangedWeaponItem implements Vanishable{
+public class ArrowGatlerItem extends BowItem implements Vanishable{
     public ArrowGatlerItem(Settings settings) {
         super(settings);
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if (!world.isClient) {
-            world.playSound((PlayerEntity) null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.3F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
-        }
         ItemStack stack = user.getStackInHand(hand);
 
-        user.getItemCooldownManager().set(this, 7);
+        user.getItemCooldownManager().set(this, 6);
 
         boolean bl1 = !user.getArrowType(stack).isEmpty();
         if (!user.getAbilities().creativeMode && !bl1) {
@@ -49,14 +46,14 @@ public class ArrowGatlerItem extends RangedWeaponItem implements Vanishable{
                     itemStack = new ItemStack(Items.ARROW);
                 }
 
-                int i = 5;
-                float f = 0.75f;
+                //int i = 5;
+                float f = 0.875f;
                 if (!((double)f < 0.1)) {
                     boolean bl2 = bl && itemStack.isOf(Items.ARROW);
                     if (!world.isClient) {
                         ArrowItem arrowItem = (ArrowItem)(itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : Items.ARROW);
                         PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, itemStack, user);
-                        persistentProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, f * 3.0F, 1.0F);
+                        persistentProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, f * 3.0F, 2.3F);
                         if (f == 1.0F) {
                             persistentProjectileEntity.setCritical(true);
                         }
@@ -87,10 +84,11 @@ public class ArrowGatlerItem extends RangedWeaponItem implements Vanishable{
                         }
 
                         world.spawnEntity(persistentProjectileEntity);
-                        world.playSound((PlayerEntity) null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_FIREWORK_ROCKET_BLAST, SoundCategory.PLAYERS, 1F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
                     }
 
-                    world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    //world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    world.playSound((PlayerEntity) null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_FIREWORK_ROCKET_BLAST, SoundCategory.PLAYERS, 1F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
+                    world.playSound((PlayerEntity) null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_SAND_PLACE, SoundCategory.PLAYERS, 1F, 0.01F);
                     if (!bl2 && !user.getAbilities().creativeMode) {
                         itemStack.decrement(1);
                         if (itemStack.isEmpty()) {
@@ -105,20 +103,20 @@ public class ArrowGatlerItem extends RangedWeaponItem implements Vanishable{
         }
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(Text.translatable("tooltip.astrovariety.right_click").formatted(Formatting.GRAY));
-    }
+    //@Override
+    //public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+    //    super.appendTooltip(stack, world, tooltip, context);
+    //    tooltip.add(Text.translatable("tooltip.astrovariety.right_click").formatted(Formatting.GRAY));
+    //}
 
-    public Predicate<ItemStack> getProjectiles() {
-        return BOW_PROJECTILES;
-    }
+    //public Predicate<ItemStack> getProjectiles() {
+    //    return BOW_PROJECTILES;
+   // }
 
-    @Override
-    public int getRange() {
-        return 15;
-    }
+   // @Override
+   // public int getRange() {
+    //    return 15;
+    //}
 
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
@@ -126,6 +124,13 @@ public class ArrowGatlerItem extends RangedWeaponItem implements Vanishable{
         if (user instanceof PlayerEntity player && !player.getItemCooldownManager().isCoolingDown(this))
         {
             stack.use(world, player, player.getActiveHand());
+        }
+    }
+
+    @Override
+    public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+        if (!world.isClient) {
+            world.playSound((PlayerEntity) null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.7F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         }
     }
 }
