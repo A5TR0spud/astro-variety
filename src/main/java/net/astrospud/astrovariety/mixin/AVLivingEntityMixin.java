@@ -12,6 +12,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -33,7 +34,11 @@ public abstract class AVLivingEntityMixin extends Entity {
     private static final UUID CANE_SPEED_ID = UUID.fromString("4577cf8a-3647-43ce-9128-71a022d5026f");
     private static final UUID GOLEM_HEALTH_ID = UUID.fromString("095f18a8-2a96-4558-9ff7-7680375309d0");
     private static final UUID DECAY_STRENGTH_ID = UUID.fromString("3bce0b01-fdaf-4cb8-a725-7540db55c34c");
+    private static final UUID ROSE_GOLD_SPEED_ID = UUID.fromString("1fd7c69e-1686-4b16-b85f-220495594263");
+
     private static boolean HAS_DECAY = false;
+
+    private BlockPos oldPos = this.getBlockPos();
 
     protected AVLivingEntityMixin(EntityType<? extends Entity> entityType, World world){
         super(entityType, world);
@@ -103,13 +108,27 @@ public abstract class AVLivingEntityMixin extends Entity {
     @Inject(at = @At(value = "HEAD"), method = "tick")
     public void avtick(CallbackInfo cir){
         if ((Object) this instanceof LivingEntity entity) {
-            //cane
+            Iterable<ItemStack> armorItems = entity.getArmorItems();
+            ArrayList<ItemStack> armor = new ArrayList<>();
+            armorItems.forEach(armor::add);
+
+            //rose gold
             EntityAttributeInstance att = entity.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
             if(att != null) {
+                double rose_gold_speed = 0;
+                if (armor.get(1).getItem() == AVItems.ROSE_GOLD_LEGGINGS && armor.get(1).getOrCreateNbt().getInt("Mode") == 1
+                        && armor.get(1).getDamage() < armor.get(1).getMaxDamage()) {
+                    rose_gold_speed+=1;
+                }
+                EntityAttributeModifier mod = new EntityAttributeModifier(ROSE_GOLD_SPEED_ID, "ASTROVarietyRoseGoldSpeed",
+                        rose_gold_speed, EntityAttributeModifier.Operation.MULTIPLY_BASE);
+                ReplaceAttributeModifier(att, mod);
+            }
+
+            //cane
+            att = entity.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+            if(att != null) {
                 float SPEED = 0;
-                Iterable<ItemStack> armorItems = entity.getArmorItems();
-                ArrayList<ItemStack> armor = new ArrayList<>();
-                armorItems.forEach(armor::add);
                 if (armor.get(0).getItem() == AVItems.CANE_BOOTS) { SPEED+=0.5; }
                 if (armor.get(1).getItem() == AVItems.CANE_LEGGINGS) { SPEED+=0.5; }
                 EntityAttributeModifier mod = new EntityAttributeModifier(CANE_SPEED_ID, "ASTROVarietyCaneSpeed",
@@ -120,9 +139,6 @@ public abstract class AVLivingEntityMixin extends Entity {
             att = entity.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
             if(att != null) {
                 float HEALTH = 0;
-                Iterable<ItemStack> armorItems = entity.getArmorItems();
-                ArrayList<ItemStack> armor = new ArrayList<>();
-                armorItems.forEach(armor::add);
                 if (armor.get(2).getItem() == AVItems.GOLEM_CHESTPLATE) { HEALTH+=4; }
                 if (armor.get(3).getItem() == AVItems.GOLEM_HELMET) { HEALTH+=2; }
                 EntityAttributeModifier mod = new EntityAttributeModifier(GOLEM_HEALTH_ID, "ASTROVarietyGolemHealth",
@@ -131,9 +147,6 @@ public abstract class AVLivingEntityMixin extends Entity {
             }
 
             if (entity instanceof PlayerEntity player) {
-                Iterable<ItemStack> armorItems = entity.getArmorItems();
-                ArrayList<ItemStack> armor = new ArrayList<>();
-                armorItems.forEach(armor::add);
                 //everseer
                 //List<Entity> list = world.getOtherEntities(player, new Box(player.getX()-50, player.getY()-50, player.getZ()-50, player.getX()+50, player.getY()+50, player.getZ()+50));
                 //for(int v = 0; v < list.size(); ++v) {
@@ -165,6 +178,34 @@ public abstract class AVLivingEntityMixin extends Entity {
                 }
             }
         }
+    }
+
+    @Inject(at = @At("RETURN"), method = "getJumpVelocity",cancellable = true)
+    public void AVLivingEntityJumpVelocityMixin(CallbackInfoReturnable<Float> info){
+        if ((Object)this instanceof LivingEntity entity) {
+            Iterable<ItemStack> armorItems = entity.getArmorItems();
+            ArrayList<ItemStack> armor = new ArrayList<>();
+            armorItems.forEach(armor::add);
+            if (armor.get(1).getItem() == AVItems.ROSE_GOLD_LEGGINGS && armor.get(1).getOrCreateNbt().getInt("Mode") == 2
+                    && armor.get(1).getDamage() < armor.get(1).getMaxDamage()) {
+                armor.get(1).setDamage(armor.get(1).getDamage()+3);
+                info.setReturnValue(info.getReturnValueF()*1.5f);
+            }
+        }
+    }
+
+    @Inject(at = @At(value = "HEAD"), method = "tickMovement")
+    public void AVTickMovementMixin(CallbackInfo info) {
+        if (this.getBlockPos() != oldPos && (Object)this instanceof LivingEntity entity) {
+            Iterable<ItemStack> armorItems = entity.getArmorItems();
+            ArrayList<ItemStack> armor = new ArrayList<>();
+            armorItems.forEach(armor::add);
+            if (armor.get(1).getItem() == AVItems.ROSE_GOLD_LEGGINGS && armor.get(1).getOrCreateNbt().getInt("Mode") == 1
+                    && armor.get(1).getDamage() < armor.get(1).getMaxDamage()) {
+                armor.get(1).setDamage(armor.get(1).getDamage()+1);
+            }
+        }
+        oldPos = this.getBlockPos();
     }
 
     private static void ReplaceAttributeModifier(EntityAttributeInstance att, EntityAttributeModifier mod)

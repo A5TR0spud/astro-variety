@@ -13,20 +13,16 @@ public class AVItems {
     //rose gold
     public static final Item ROSE_GOLD_HELMET = registerItem("charged_rose_gold_helmet",
             new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.HEAD,
-                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1),
-                    0xff3333));
+                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
     public static final Item ROSE_GOLD_CHESTPLATE = registerItem("charged_rose_gold_chestplate",
             new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.CHEST,
-                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1),
-                    0xff3333));
+                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
     public static final Item ROSE_GOLD_LEGGINGS = registerItem("charged_rose_gold_leggings",
             new RoseGoldLeggingsArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.LEGS,
-                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1),
-                    0xff3333));
+                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
     public static final Item ROSE_GOLD_BOOTS = registerItem("charged_rose_gold_boots",
             new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.FEET,
-                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1),
-                    0xff3333));
+                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
 
     //blaze
     public static final Item EMBER_INGOT = registerItem("ember_ingot",

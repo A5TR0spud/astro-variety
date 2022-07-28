@@ -24,9 +24,10 @@
 
   "item.astrovariety.arrow_gatler": "Arrow Gatler",
 
-  "tooltip.astrovariety.modespeed": "Mode: Speed",
-  "tooltip.astrovariety.modejump": "Mode: Jumpheight",
-  "tooltip.astrovariety.modestep": "Mode: Stepheight",
+  "tooltip.astrovariety.mode.empty": "Mode: Empty",
+  "tooltip.astrovariety.mode.speed": "Mode: Speed",
+  "tooltip.astrovariety.mode.jump": "Mode: Jumpheight",
+  "tooltip.astrovariety.mode.step": "Mode: Stepheight",
 
   "tooltip.astrovariety.cactus_armor": "Prickly",
   "tooltip.astrovariety.blaze": "Fire Resilient",

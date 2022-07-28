@@ -18,8 +18,8 @@ public class RoseGoldArmorItem extends AVArmorItem {
     final static int MAX_TICK = 600;
     int tick = MAX_TICK;
 
-    public RoseGoldArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings, int color) {
-        super(material, slot, settings, color);
+    public RoseGoldArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
+        super(material, slot, settings, 0xff6666);
     }
 
     @Override
@@ -37,7 +37,6 @@ public class RoseGoldArmorItem extends AVArmorItem {
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
         if (clickType == ClickType.RIGHT && slot.canTakePartial(player)) {
             redstoneRepair(stack, otherStack);
-
             return true;
         } else {
             return false;
@@ -47,7 +46,12 @@ public class RoseGoldArmorItem extends AVArmorItem {
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
-        if (entity instanceof LivingEntity && slot == this.slot.getEntitySlotId()) {
+        if (entity instanceof PlayerEntity player && (player.isCreative() || player.isSpectator()))
+        {
+            return;
+        }
+        if (entity instanceof LivingEntity && slot == this.slot.getEntitySlotId()
+                ) {
             tick++;
             if (tick >= MAX_TICK) {
                 tick = 0;
