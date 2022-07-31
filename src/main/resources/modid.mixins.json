@@ -4,7 +4,8 @@
   "package": "net.astrospud.astrovariety.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "AVLivingEntityMixin"
+    "AVLivingEntityMixin",
+    "AVPlayerEntityMixin"
   ],
   "client": [
     "ExampleMixin"

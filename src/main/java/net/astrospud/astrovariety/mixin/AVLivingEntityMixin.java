@@ -1,6 +1,8 @@
 package net.astrospud.astrovariety.mixin;
 
 import net.astrospud.astrovariety.registry.AVItems;
+import net.astrospud.astrovariety.util.AVUtil;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -35,10 +37,14 @@ public abstract class AVLivingEntityMixin extends Entity {
     private static final UUID GOLEM_HEALTH_ID = UUID.fromString("095f18a8-2a96-4558-9ff7-7680375309d0");
     private static final UUID DECAY_STRENGTH_ID = UUID.fromString("3bce0b01-fdaf-4cb8-a725-7540db55c34c");
     private static final UUID ROSE_GOLD_SPEED_ID = UUID.fromString("1fd7c69e-1686-4b16-b85f-220495594263");
+    private static final UUID ROSE_GOLD_ATTACK_ID = UUID.fromString("12ce7946-891d-4678-b003-414d77a1a459");
 
     private static boolean HAS_DECAY = false;
 
+
     private BlockPos oldPos = this.getBlockPos();
+
+    private static int roseGoldLegTick = 0;
 
     protected AVLivingEntityMixin(EntityType<? extends Entity> entityType, World world){
         super(entityType, world);
@@ -112,21 +118,46 @@ public abstract class AVLivingEntityMixin extends Entity {
             ArrayList<ItemStack> armor = new ArrayList<>();
             armorItems.forEach(armor::add);
 
-            //rose gold
-            EntityAttributeInstance att = entity.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
-            if(att != null) {
-                double rose_gold_speed = 0;
-                if (armor.get(1).getItem() == AVItems.ROSE_GOLD_LEGGINGS && armor.get(1).getOrCreateNbt().getInt("Mode") == 1
-                        && armor.get(1).getDamage() < armor.get(1).getMaxDamage()) {
-                    rose_gold_speed+=1;
+            if (entity instanceof PlayerEntity player) {
+                //rose gold
+                EntityAttributeInstance att = entity.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+                if(att != null) {
+                    double rose_gold_speed = 0;
+                    if (AVUtil.boolDamageRoseGold(player, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 1, 1, true, false)){
+                        rose_gold_speed+=1;
+                    }
+                    EntityAttributeModifier mod = new EntityAttributeModifier(ROSE_GOLD_SPEED_ID, "ASTROVarietyRoseGoldSpeed",
+                            rose_gold_speed, EntityAttributeModifier.Operation.MULTIPLY_BASE);
+                    ReplaceAttributeModifier(att, mod);
                 }
-                EntityAttributeModifier mod = new EntityAttributeModifier(ROSE_GOLD_SPEED_ID, "ASTROVarietyRoseGoldSpeed",
-                        rose_gold_speed, EntityAttributeModifier.Operation.MULTIPLY_BASE);
-                ReplaceAttributeModifier(att, mod);
+                /*if (AVUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 1, 2, true, false)
+                        && !entity.hasStatusEffect(StatusEffects.ABSORPTION)) {
+                    entity.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 150, 0, true, false, true));
+                    entity.heal(1);
+                    AVUtil.damageRoseGoldStack(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 1, 2);
+                }*/
+
+                att = entity.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_SPEED);
+                if (att != null) {
+                    double rose_gold_attack = 0;
+                    if (AVUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 3, 2, true, true)){
+                        rose_gold_attack = 0.25;
+                    }
+                    EntityAttributeModifier mod = new EntityAttributeModifier(ROSE_GOLD_ATTACK_ID, "ASTROVarietyRoseGoldAttack",
+                            rose_gold_attack, EntityAttributeModifier.Operation.MULTIPLY_BASE);
+                    ReplaceAttributeModifier(att, mod);
+                }
+
+                if (AVUtil.boolDamageRoseGold(player, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 3, 1, true, false)){
+                    player.stepHeight = 1.5f;
+                }
+                else {
+                    player.stepHeight = 0.6F;
+                }
             }
 
             //cane
-            att = entity.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+            EntityAttributeInstance att = entity.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
             if(att != null) {
                 float SPEED = 0;
                 if (armor.get(0).getItem() == AVItems.CANE_BOOTS) { SPEED+=0.5; }
@@ -182,13 +213,11 @@ public abstract class AVLivingEntityMixin extends Entity {
 
     @Inject(at = @At("RETURN"), method = "getJumpVelocity",cancellable = true)
     public void AVLivingEntityJumpVelocityMixin(CallbackInfoReturnable<Float> info){
-        if ((Object)this instanceof LivingEntity entity) {
+        if ((Object)this instanceof PlayerEntity entity) {
             Iterable<ItemStack> armorItems = entity.getArmorItems();
             ArrayList<ItemStack> armor = new ArrayList<>();
             armorItems.forEach(armor::add);
-            if (armor.get(1).getItem() == AVItems.ROSE_GOLD_LEGGINGS && armor.get(1).getOrCreateNbt().getInt("Mode") == 2
-                    && armor.get(1).getDamage() < armor.get(1).getMaxDamage()) {
-                armor.get(1).setDamage(armor.get(1).getDamage()+3);
+            if (AVUtil.boolDamageRoseGold(entity, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 2, 3, true, true)){
                 info.setReturnValue(info.getReturnValueF()*1.5f);
             }
         }
@@ -196,14 +225,25 @@ public abstract class AVLivingEntityMixin extends Entity {
 
     @Inject(at = @At(value = "HEAD"), method = "tickMovement")
     public void AVTickMovementMixin(CallbackInfo info) {
-        if (this.getBlockPos() != oldPos && (Object)this instanceof LivingEntity entity) {
-            Iterable<ItemStack> armorItems = entity.getArmorItems();
-            ArrayList<ItemStack> armor = new ArrayList<>();
-            armorItems.forEach(armor::add);
-            if (armor.get(1).getItem() == AVItems.ROSE_GOLD_LEGGINGS && armor.get(1).getOrCreateNbt().getInt("Mode") == 1
-                    && armor.get(1).getDamage() < armor.get(1).getMaxDamage()) {
-                armor.get(1).setDamage(armor.get(1).getDamage()+1);
+        if (this.getBlockPos() != oldPos && (Object)this instanceof PlayerEntity entity) {
+            if (roseGoldLegTick > 9) {
+                roseGoldLegTick = 0;
+                Iterable<ItemStack> armorItems = entity.getArmorItems();
+                ArrayList<ItemStack> armor = new ArrayList<>();
+                armorItems.forEach(armor::add);
+                AVUtil.damageRoseGoldStack(entity, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 1, 1);
             }
+            roseGoldLegTick++;
+        }
+        if (this.getBlockPos() != oldPos && (Object)this instanceof PlayerEntity entity) {
+            if (roseGoldLegTick > 36) {
+                roseGoldLegTick = 0;
+                Iterable<ItemStack> armorItems = entity.getArmorItems();
+                ArrayList<ItemStack> armor = new ArrayList<>();
+                armorItems.forEach(armor::add);
+                AVUtil.damageRoseGoldStack(entity, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 3, 1);
+            }
+            roseGoldLegTick++;
         }
         oldPos = this.getBlockPos();
     }

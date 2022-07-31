@@ -28,6 +28,9 @@
   "tooltip.astrovariety.mode.speed": "Mode: Speed",
   "tooltip.astrovariety.mode.jump": "Mode: Jumpheight",
   "tooltip.astrovariety.mode.step": "Mode: Stepheight",
+  "tooltip.astrovariety.mode.health": "Mode: Resilience",
+  "tooltip.astrovariety.mode.mine": "Mode: Mine Speed",
+  "tooltip.astrovariety.mode.attack": "Mode: Attack Speed",
 
   "tooltip.astrovariety.cactus_armor": "Prickly",
   "tooltip.astrovariety.blaze": "Fire Resilient",

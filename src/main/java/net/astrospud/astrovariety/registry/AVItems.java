@@ -15,10 +15,10 @@ public class AVItems {
             new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.HEAD,
                     new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
     public static final Item ROSE_GOLD_CHESTPLATE = registerItem("charged_rose_gold_chestplate",
-            new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.CHEST,
+            new RoseGoldChestplateArmorItem(
                     new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
     public static final Item ROSE_GOLD_LEGGINGS = registerItem("charged_rose_gold_leggings",
-            new RoseGoldLeggingsArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.LEGS,
+            new RoseGoldLeggingsArmorItem(
                     new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
     public static final Item ROSE_GOLD_BOOTS = registerItem("charged_rose_gold_boots",
             new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.FEET,
