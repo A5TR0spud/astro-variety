@@ -5,24 +5,28 @@
   "item.astrovariety.charged_rose_gold_boots": "Charged Rose Gold Boots",
 
   "item.astrovariety.ember_ingot": "Ember Ingot",
+  "item.astrovariety.alchemy_catalyst": "Alchemy Catalyst",
+
   "item.astrovariety.blaze_hat": "Blaze Hat",
   "item.astrovariety.blaze_boots": "Blaze Boots",
-
   "item.astrovariety.cactus_chestplate": "Cactus Tunic",
-
   "item.astrovariety.compact_sugar_cane": "Compact Sugar Cane",
   "item.astrovariety.cane_boots": "Cane Boots",
   "item.astrovariety.cane_leggings": "Cane Leggings",
-
   "item.astrovariety.golem_helmet": "Golem Helmet",
   "item.astrovariety.golem_chestplate": "Golem Chestplate",
-
   "item.astrovariety.seer_helmet": "Helm of the Everseer",
+
   "item.astrovariety.sword_of_leaping": "Sword of Leaping",
 
   "item.astrovariety.talisman_of_decay": "Talisman of Decay",
+  "item.astrovariety.bleeding_heart": "Bleeding Heart",
+  "item.astrovariety.gold_pill": "Gold Pill",
+  "item.astrovariety.dwarven_pickaxe": "Dwarven Pickaxe",
+  "item.astrovariety.wind_pearls": "Wind Pearls",
 
   "item.astrovariety.arrow_gatler": "Arrow Gatler",
+  "block.astrovariety.alchemy_table": "Alchemy Table",
 
   "tooltip.astrovariety.mode.empty": "Mode: Empty",
   "tooltip.astrovariety.mode.speed": "Mode: Speed",
@@ -31,6 +35,9 @@
   "tooltip.astrovariety.mode.health": "Mode: Resilience",
   "tooltip.astrovariety.mode.mine": "Mode: Mine Speed",
   "tooltip.astrovariety.mode.attack": "Mode: Attack Speed",
+
+  "tooltip.astrovariety.toggle.true": "State: On",
+  "tooltip.astrovariety.toggle.false": "State: Off",
 
   "tooltip.astrovariety.cactus_armor": "Prickly",
   "tooltip.astrovariety.blaze": "Fire Resilient",
@@ -43,5 +50,14 @@
   "tooltip.astrovariety.decay_desc_1": "Decay exists as an",
   "tooltip.astrovariety.decay_desc_2": "   extant form of life",
   "tooltip.astrovariety.decay_quote_1": "\"You cannot kill me in",
-  "tooltip.astrovariety.decay_quote_2": "   a way that matters\""
+  "tooltip.astrovariety.decay_quote_2": "   a way that matters\"",
+
+  "tooltip.astrovariety.bleeding_heart_1": "Heals you over time at",
+  "tooltip.astrovariety.bleeding_heart_2": "the cost of your strength",
+  "tooltip.astrovariety.gold_pill_1": "Fills you over time",
+  "tooltip.astrovariety.gold_pill_2": "May cause light-headedness",
+  "tooltip.astrovariety.dwarven_pickaxe_1": "Increases mine speed",
+  "tooltip.astrovariety.dwarven_pickaxe_2": "Causes hunger",
+  "tooltip.astrovariety.wind_pearls_1": "Enhances your movement",
+  "tooltip.astrovariety.wind_pearls_2": "Fluctuates wildly"
 }

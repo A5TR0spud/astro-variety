@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sugar_cane": {
+    "has_blaze_rod": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:sugar_cane"
+              "minecraft:blaze_rod"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "astrovariety:cane_leggings"
+        "recipe": "astrovariety:alchemy_catalyst"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_sugar_cane",
+      "has_blaze_rod",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "astrovariety:cane_leggings"
+      "astrovariety:alchemy_catalyst"
     ]
   }
 }

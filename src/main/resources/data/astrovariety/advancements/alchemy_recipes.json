@@ -1,0 +1,82 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_alchemy_catalyst": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "astrovariety:alchemy_catalyst"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe1": {
+      "conditions": {
+        "recipe": "astrovariety:redstone"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_recipe2": {
+      "conditions": {
+        "recipe": "astrovariety:glowstone_dust"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_recipe3": {
+      "conditions": {
+        "recipe": "astrovariety:gunpowder"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_recipe4": {
+      "conditions": {
+        "recipe": "astrovariety:bleeding_heart"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_recipe5": {
+      "conditions": {
+        "recipe": "astrovariety:gold_pill"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_recipe6": {
+      "conditions": {
+        "recipe": "astrovariety:dwarven_pickaxe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_recipe7": {
+      "conditions": {
+        "recipe": "astrovariety:wind_pearls"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_alchemy_catalyst",
+      "has_the_recipe1",
+      "has_the_recipe2",
+      "has_the_recipe3",
+      "has_the_recipe4",
+      "has_the_recipe5",
+      "has_the_recipe6",
+      "has_the_recipe7"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "astrovariety:redstone",
+      "astrovariety:glowstone_dust",
+      "astrovariety:gunpowder",
+      "astrovariety:bleeding_heart",
+      "astrovariety:gold_pill",
+      "astrovariety:dwarven_pickaxe",
+      "astrovariety:wind_pearls"
+    ]
+  }
+}

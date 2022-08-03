@@ -102,7 +102,6 @@ public abstract class AVLivingEntityMixin extends Entity {
         }
     }
 
-
     @ModifyVariable(at = @At("HEAD"), ordinal = 0, method = "damage")
     public float avVarDamageMixin(float finalAmount, DamageSource source, float amount) {
         if ((Object) this instanceof PlayerEntity entity && HAS_DECAY) {

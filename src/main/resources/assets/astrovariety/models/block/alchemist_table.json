@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "astrovariety:block/alchemist_table_bottom",
+    "east": "astrovariety:block/alchemist_table_side",
+    "north": "astrovariety:block/alchemist_table_front",
+    "particle": "astrovariety:block/alchemist_table_front",
+    "south": "astrovariety:block/alchemist_table_front",
+    "up": "astrovariety:block/alchemist_table_top",
+    "west": "astrovariety:block/alchemist_table_side"
+  }
+}

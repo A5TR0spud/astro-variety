@@ -55,7 +55,7 @@ public abstract class AVPlayerEntityMixin extends LivingEntity{
             ArrayList<ItemStack> armor = new ArrayList<>();
             armorItems.forEach(armor::add);
             if (AVUtil.boolDamageRoseGold(entity, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 2, 1, true, true)) {
-                f = 1.35f;
+                f = 2f;
             }
         }
         cir.setReturnValue(cir.getReturnValue()*f);

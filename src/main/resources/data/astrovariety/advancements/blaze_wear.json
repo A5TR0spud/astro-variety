@@ -18,17 +18,25 @@
         "recipe": "astrovariety:blaze_boots"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_recipe2": {
+      "conditions": {
+        "recipe": "astrovariety:blaze_hat"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
       "has_ember_ingot",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_the_recipe2"
     ]
   ],
   "rewards": {
     "recipes": [
-      "astrovariety:blaze_boots"
+      "astrovariety:blaze_boots",
+      "astrovariety:blaze_hat"
     ]
   }
 }

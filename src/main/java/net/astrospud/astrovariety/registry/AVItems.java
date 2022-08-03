@@ -27,6 +27,9 @@ public class AVItems {
     //blaze
     public static final Item EMBER_INGOT = registerItem("ember_ingot",
             new Item(new FabricItemSettings().group(ItemGroup.MATERIALS).fireproof()));
+    public static final Item ALCHEMY_CATALYST = registerItem("alchemy_catalyst",
+            new Item(new FabricItemSettings().group(ItemGroup.MATERIALS)));
+
     public static final Item BLAZE_HAT = registerItem("blaze_hat",
             new AVArmorItem(AVArmorMaterial.BLAZE, EquipmentSlot.HEAD,
                     new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1).fireproof(),
@@ -87,6 +90,14 @@ public class AVItems {
 
     //public static final Item TALISMAN_OF_ = registerItem("talisman_of_",
             //new TalismanItem("")); //failure is the opportunity to begin again... don’t die just yet
+    public static final Item BLEEDING_HEART = registerItem("bleeding_heart",
+            new BleedingHeartItem());
+    public static final Item GOLD_PILL = registerItem("gold_pill",
+            new GoldPillItem());
+    public static final Item DWARVEN_PICKAXE = registerItem("dwarven_pickaxe",
+            new DwarvenPickaxeItem());
+    public static final Item WIND_PEARLS = registerItem("wind_pearls",
+            new WindPearlsItem());
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(AstroVariety.MOD_ID, name), item);

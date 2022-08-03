@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_iron_ingot": {
+    "has_sugar_cane": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:iron_ingot"
+              "minecraft:sugar_cane"
             ]
           }
         ]
@@ -15,20 +15,28 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "astrovariety:golem_helmet"
+        "recipe": "astrovariety:cane_boots"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_recipe2": {
+      "conditions": {
+        "recipe": "astrovariety:cane_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_iron_ingot",
-      "has_the_recipe"
+      "has_sugar_cane",
+      "has_the_recipe",
+      "has_the_recipe2"
     ]
   ],
   "rewards": {
     "recipes": [
-      "astrovariety:golem_helmet"
+      "astrovariety:cane_boots",
+      "astrovariety:cane_leggings"
     ]
   }
 }

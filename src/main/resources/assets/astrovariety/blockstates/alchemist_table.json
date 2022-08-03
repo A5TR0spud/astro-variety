@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=true": {
+      "model": "astrovariety:block/alchemist_table_on"
+    },
+    "lit=false": {
+      "model": "astrovariety:block/alchemist_table"
+    }
+  }
+}
