@@ -129,12 +129,12 @@ public abstract class AVLivingEntityMixin extends Entity {
                             rose_gold_speed, EntityAttributeModifier.Operation.MULTIPLY_BASE);
                     ReplaceAttributeModifier(att, mod);
                 }
-                /*if (AVUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 1, 2, true, false)
+                if (AVUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 1, 2, true, false)
                         && !entity.hasStatusEffect(StatusEffects.ABSORPTION)) {
                     entity.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 150, 0, true, false, true));
                     entity.heal(1);
                     AVUtil.damageRoseGoldStack(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 1, 2);
-                }*/
+                }
 
                 att = entity.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_SPEED);
                 if (att != null) {

@@ -59,5 +59,7 @@
   "tooltip.astrovariety.dwarven_pickaxe_1": "Increases mine speed",
   "tooltip.astrovariety.dwarven_pickaxe_2": "Causes hunger",
   "tooltip.astrovariety.wind_pearls_1": "Enhances your movement",
-  "tooltip.astrovariety.wind_pearls_2": "Fluctuates wildly"
+  "tooltip.astrovariety.wind_pearls_2": "Fluctuates wildly",
+
+  "effect.astrovariety.bleeding": "Growth"
 }

@@ -2,6 +2,7 @@ package net.astrospud.astrovariety;
 
 import net.astrospud.astrovariety.registry.AVBlocks;
 import net.astrospud.astrovariety.registry.AVItems;
+import net.astrospud.astrovariety.registry.AVStatusEffects;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,5 +23,6 @@ public class AstroVariety implements ModInitializer {
 		LOGGER.info("Hello Fabric world!");
 		AVItems.registerModItems();
 		AVBlocks.registerModBlocks();
+		AVStatusEffects.register();
 	}
 }

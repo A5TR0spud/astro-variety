@@ -1,5 +1,7 @@
 package net.astrospud.astrovariety.types;
 
+import net.astrospud.astrovariety.registry.AVItems;
+import net.astrospud.astrovariety.registry.AVStatusEffects;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -28,10 +30,17 @@ public class BleedingHeartItem extends ToggleItem {
     public void specialTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (entity instanceof PlayerEntity player && player.getHealth() < player.getMaxHealth()
         && !player.getItemCooldownManager().isCoolingDown(stack.getItem())
-        && toggle) {
+        && toggle && !player.hasStatusEffect(AVStatusEffects.BLEEDING)) {
+            int count = -1;
+            for (int i = 0; i < player.getInventory().size(); i++) {
+                if (player.getInventory().getStack(i).getItem() == AVItems.BLEEDING_HEART) {
+                    count ++;
+                }
+            }
+            if (count < 0) {count = 0;}
+
             player.getItemCooldownManager().set(stack.getItem(), 20);
-            player.heal(1);
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS,20, 0, false, false, true));
+            player.addStatusEffect(new StatusEffectInstance(AVStatusEffects.BLEEDING,20, count, false, false, true));
         }
     }
 
