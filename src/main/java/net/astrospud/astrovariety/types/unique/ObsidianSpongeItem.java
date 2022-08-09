@@ -71,9 +71,9 @@ public class ObsidianSpongeItem extends Item implements FluidModificationItem {
                             return TypedActionResult.success(user.getStackInHand(hand), world.isClient());
                         }
                     }
-
                     return TypedActionResult.fail(itemStack);
-                } else {
+                }
+                else {
                     blockState = world.getBlockState(blockPos);
                     BlockPos blockPos3 = blockState.getBlock() instanceof FluidFillable && this.fluid == Fluids.WATER ? blockPos : blockPos2;
                     if (this.placeFluid(user, world, blockPos3, blockHitResult)) {

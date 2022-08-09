@@ -1,21 +1,32 @@
 package net.astrospud.astrovariety.types.magicsupport;
 
+import com.ibm.icu.text.MessagePattern;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.resource.ResourceReloader;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,9 +57,26 @@ public class WindPearlsItem extends ToggleItem {
         }
         if (entity instanceof PlayerEntity player && toggle) {
             if (player.fallDistance > player.getSafeFallDistance()*0.90f) {
-                player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 19, 128, false, false, true));
-                //player.addVelocity(0D, 0.5D, 0D);
-                //player.setVelocity(new Vec3d(player.getVelocity().x, player.getVelocity().y * 0.1D, player.getVelocity().z));
+                BlockHitResult cast = world.raycast(new RaycastContext(
+                        new Vec3d(player.getPos().x, player.getPos().y, player.getPos().z),
+                        new Vec3d(player.getPos().x, player.getPos().y-3, player.getPos().z),
+                        RaycastContext.ShapeType.COLLIDER,
+                        RaycastContext.FluidHandling.NONE,
+                        player
+                ));
+                if (cast.getType() == HitResult.Type.BLOCK &&
+                        !(Fluids.WATER == world.getFluidState(cast.getBlockPos().up()).getFluid()
+                        || Fluids.FLOWING_WATER == world.getFluidState(cast.getBlockPos().up()).getFluid())) {
+                    player.setVelocity(player.getVelocity().x, player.getVelocity().y*0.5, player.getVelocity().z);
+                    player.playSound(SoundEvents.BLOCK_WOOL_FALL, 1, 1);
+
+                    /*if (world.isClient()) {
+                        ParticleEffect particle = ParticleTypes.FLAME;
+                        world.addParticle(particle, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
+                    }*/
+
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 25, 64, false, false, true));
+                }
             }
         }
     }
