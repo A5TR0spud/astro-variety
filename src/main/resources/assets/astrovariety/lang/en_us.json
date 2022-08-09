@@ -21,6 +21,7 @@
 
   "item.astrovariety.talisman_of_decay": "Talisman of Decay",
   "item.astrovariety.bleeding_heart": "Bleeding Heart",
+  "item.astrovariety.nanomachine": "Nanomachines",
   "item.astrovariety.gold_pill": "Gold Pill",
   "item.astrovariety.dwarven_pickaxe": "Dwarven Pickaxe",
   "item.astrovariety.wind_pearls": "Wind Pearls",
@@ -54,6 +55,8 @@
 
   "tooltip.astrovariety.bleeding_heart_1": "Heals you over time at",
   "tooltip.astrovariety.bleeding_heart_2": "the cost of your strength",
+  "tooltip.astrovariety.nanomachine_1": "Heals you over time at",
+  "tooltip.astrovariety.nanomachine_2": "the cost of your speed",
   "tooltip.astrovariety.gold_pill_1": "Fills you over time",
   "tooltip.astrovariety.gold_pill_2": "May cause light-headedness",
   "tooltip.astrovariety.dwarven_pickaxe_1": "Increases mine speed",
@@ -61,5 +64,6 @@
   "tooltip.astrovariety.wind_pearls_1": "Enhances your movement",
   "tooltip.astrovariety.wind_pearls_2": "Fluctuates wildly",
 
-  "effect.astrovariety.bleeding": "Growth"
+  "effect.astrovariety.bleeding": "Growth",
+  "effect.astrovariety.nanomachines": "Nano Repair"
 }

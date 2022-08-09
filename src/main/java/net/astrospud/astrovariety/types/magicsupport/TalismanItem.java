@@ -1,4 +1,4 @@
-package net.astrospud.astrovariety.types;
+package net.astrospud.astrovariety.types.magicsupport;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;

@@ -1,15 +1,10 @@
 package net.astrospud.astrovariety.registry;
 
 import net.astrospud.astrovariety.AstroVariety;
-import net.astrospud.astrovariety.types.AlchemistTableBlock;
-import net.astrospud.astrovariety.types.TalismanItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
-import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 

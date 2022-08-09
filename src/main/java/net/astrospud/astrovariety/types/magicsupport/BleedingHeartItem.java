@@ -1,18 +1,14 @@
-package net.astrospud.astrovariety.types;
+package net.astrospud.astrovariety.types.magicsupport;
 
 import net.astrospud.astrovariety.registry.AVItems;
 import net.astrospud.astrovariety.registry.AVStatusEffects;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
@@ -33,7 +29,7 @@ public class BleedingHeartItem extends ToggleItem {
         && toggle && !player.hasStatusEffect(AVStatusEffects.BLEEDING)) {
             int count = -1;
             for (int i = 0; i < player.getInventory().size(); i++) {
-                if (player.getInventory().getStack(i).getItem() == AVItems.BLEEDING_HEART) {
+                if (player.getInventory().getStack(i).getItem() == stack.getItem()) {
                     count ++;
                 }
             }

@@ -1,17 +1,14 @@
-package net.astrospud.astrovariety.types;
+package net.astrospud.astrovariety.types.magicsupport;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.DamageModifierStatusEffect;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 
-import java.util.UUID;
-
-public class BleedingStatusEffect extends DamageModifierStatusEffect {
-    public BleedingStatusEffect(StatusEffectCategory category, int color, double modifier) {
-        super(category, color, modifier);
+public class NanomachinesStatusEffect extends StatusEffect {
+    public NanomachinesStatusEffect(StatusEffectCategory category, int color) {
+        super(category, color);
     }
 
     @Override

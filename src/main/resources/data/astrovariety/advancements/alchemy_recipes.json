@@ -54,6 +54,12 @@
         "recipe": "astrovariety:wind_pearls"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_recipe8": {
+      "conditions": {
+        "recipe": "astrovariety:nanomachine"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
@@ -65,7 +71,8 @@
       "has_the_recipe4",
       "has_the_recipe5",
       "has_the_recipe6",
-      "has_the_recipe7"
+      "has_the_recipe7",
+      "has_the_recipe8"
     ]
   ],
   "rewards": {
@@ -76,7 +83,8 @@
       "astrovariety:bleeding_heart",
       "astrovariety:gold_pill",
       "astrovariety:dwarven_pickaxe",
-      "astrovariety:wind_pearls"
+      "astrovariety:wind_pearls",
+      "astrovariety:nanomachine"
     ]
   }
 }

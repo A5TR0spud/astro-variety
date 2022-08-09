@@ -2,6 +2,7 @@ package net.astrospud.astrovariety.registry;
 
 import net.astrospud.astrovariety.AstroVariety;
 import net.astrospud.astrovariety.types.*;
+import net.astrospud.astrovariety.types.magicsupport.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
@@ -11,7 +12,7 @@ import net.minecraft.util.registry.Registry;
 
 public class AVItems {
     //rose gold
-    public static final Item ROSE_GOLD_HELMET = registerItem("charged_rose_gold_helmet",
+    /*public static final Item ROSE_GOLD_HELMET = registerItem("charged_rose_gold_helmet",
             new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.HEAD,
                     new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
     public static final Item ROSE_GOLD_CHESTPLATE = registerItem("charged_rose_gold_chestplate",
@@ -23,6 +24,8 @@ public class AVItems {
     public static final Item ROSE_GOLD_BOOTS = registerItem("charged_rose_gold_boots",
             new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.FEET,
                     new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
+    public static final Item ROSE_GOLD_INGOT = registerItem("rose_gold_ingot",
+            new Item(new FabricItemSettings().group(ItemGroup.MATERIALS)));*/
 
     //blaze
     public static final Item EMBER_INGOT = registerItem("ember_ingot",
@@ -92,6 +95,8 @@ public class AVItems {
             //new TalismanItem("")); //failure is the opportunity to begin again... don’t die just yet
     public static final Item BLEEDING_HEART = registerItem("bleeding_heart",
             new BleedingHeartItem());
+    public static final Item NANOMACHINE = registerItem("nanomachine",
+            new NanomachineItem());
     public static final Item GOLD_PILL = registerItem("gold_pill",
             new GoldPillItem());
     public static final Item DWARVEN_PICKAXE = registerItem("dwarven_pickaxe",

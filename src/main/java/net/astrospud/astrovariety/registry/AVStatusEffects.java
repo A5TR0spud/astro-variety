@@ -1,18 +1,14 @@
 package net.astrospud.astrovariety.registry;
 
 import net.astrospud.astrovariety.AstroVariety;
-import net.astrospud.astrovariety.types.AVStatusEffect;
-import net.astrospud.astrovariety.types.BleedingStatusEffect;
-import net.astrospud.astrovariety.types.NanomachinesStatusEffect;
+import net.astrospud.astrovariety.types.magicsupport.BleedingStatusEffect;
+import net.astrospud.astrovariety.types.magicsupport.NanomachinesStatusEffect;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.DamageModifierStatusEffect;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-
-import java.util.UUID;
 
 public class AVStatusEffects {
     private static final String BLEEDING_ID = "d126e566-5543-4add-946b-798aca10cd02";
