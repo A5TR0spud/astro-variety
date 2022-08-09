@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "astrovariety:bottomless_water_bucket"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_recipe1": {
+      "conditions": {
+        "recipe": "astrovariety:bottomless_lava_bucket"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_bucket",
+      "has_the_recipe",
+      "has_the_recipe1"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "astrovariety:bottomless_water_bucket",
+      "astrovariety:bottomless_lava_bucket"
+    ]
+  }
+}

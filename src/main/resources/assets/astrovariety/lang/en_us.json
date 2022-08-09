@@ -28,6 +28,9 @@
 
   "item.astrovariety.ultra_absorbent_sponge": "Ultra Absorbent Sponge",
   "item.astrovariety.obsidian_sponge": "Obsidian Sponge",
+  "item.astrovariety.rainbow_soaker": "Rainbow Soaker",
+  "item.astrovariety.bottomless_water_bucket": "Bottomless Water Bucket",
+  "item.astrovariety.bottomless_lava_bucket": "Bottomless Lava Bucket",
 
   "item.astrovariety.arrow_gatler": "Arrow Gatler",
   "block.astrovariety.alchemy_table": "Alchemy Table",
@@ -64,8 +67,8 @@
   "tooltip.astrovariety.gold_pill_2": "May cause light-headedness",
   "tooltip.astrovariety.dwarven_pickaxe_1": "Increases mine speed",
   "tooltip.astrovariety.dwarven_pickaxe_2": "Causes hunger",
-  "tooltip.astrovariety.wind_pearls_1": "Enhances your movement",
-  "tooltip.astrovariety.wind_pearls_2": "Fluctuates wildly",
+  "tooltip.astrovariety.wind_pearls_1": "Enhances your movement at",
+  "tooltip.astrovariety.wind_pearls_2": "the cost of your strength",
 
   "effect.astrovariety.bleeding": "Growth",
   "effect.astrovariety.nanomachines": "Nano Repair"

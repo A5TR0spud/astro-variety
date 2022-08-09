@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CLC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:lava_bucket"
+    },
+    "L": {
+      "item": "astrovariety:alchemy_catalyst"
+    }
+  },
+  "result": {
+    "item": "astrovariety:bottomless_lava_bucket"
+  }
+}

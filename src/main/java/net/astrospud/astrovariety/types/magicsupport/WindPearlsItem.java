@@ -51,6 +51,7 @@ public class WindPearlsItem extends ToggleItem {
                     count ++;
                 }
             }
+            player.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 100, count-1, false, false, true));
 
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 100, count-1, false, false, true));
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 100, count-1, false, false, true));

@@ -3,10 +3,13 @@ package net.astrospud.astrovariety.registry;
 import net.astrospud.astrovariety.AstroVariety;
 import net.astrospud.astrovariety.types.theoriginals.*;
 import net.astrospud.astrovariety.types.magicsupport.*;
+import net.astrospud.astrovariety.types.unique.BottomlessBucketItem;
 import net.astrospud.astrovariety.types.unique.ObsidianSpongeItem;
+import net.astrospud.astrovariety.types.unique.RainbowSoakerItem;
 import net.astrospud.astrovariety.types.unique.UltraAbsorbentSpongeItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -105,10 +108,17 @@ public class AVItems {
             new DwarvenPickaxeItem());
     public static final Item WIND_PEARLS = registerItem("wind_pearls",
             new WindPearlsItem());
+
     public static final Item ULTRA_ABSORBENT_SPONGE = registerItem("ultra_absorbent_sponge",
-            new UltraAbsorbentSpongeItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1)));
+            new UltraAbsorbentSpongeItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
     public static final Item OBSIDIAN_SPONGE = registerItem("obsidian_sponge",
-            new ObsidianSpongeItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1)));
+            new ObsidianSpongeItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
+    public static final Item RAINBOW_SOAKER = registerItem("rainbow_soaker",
+            new RainbowSoakerItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
+    public static final Item BOTTOMLESS_WATER_BUCKET = registerItem("bottomless_water_bucket",
+            new BottomlessBucketItem(Fluids.WATER, new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
+    public static final Item BOTTOMLESS_LAVA_BUCKET = registerItem("bottomless_lava_bucket",
+            new BottomlessBucketItem(Fluids.LAVA, new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(AstroVariety.MOD_ID, name), item);

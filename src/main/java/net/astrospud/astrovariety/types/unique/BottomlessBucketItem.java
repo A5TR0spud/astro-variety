@@ -1,15 +1,14 @@
 package net.astrospud.astrovariety.types.unique;
 
-import com.google.common.collect.Lists;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.*;
+import net.minecraft.item.FluidModificationItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -18,7 +17,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Pair;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -30,16 +28,12 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Queue;
+public class BottomlessBucketItem extends Item implements FluidModificationItem {
+    private final Fluid fluid;
 
-import static net.minecraft.block.Block.dropStacks;
-
-public class UltraAbsorbentSpongeItem extends Item implements FluidModificationItem {
-    private final Fluid fluid = Fluids.EMPTY;
-
-    public UltraAbsorbentSpongeItem(/*Fluid fluid, */Item.Settings settings) {
+    public BottomlessBucketItem(Fluid fluid, Settings settings) {
         super(settings);
-        //this.fluid = fluid;
+        this.fluid = fluid;
     }
 
     @Override
@@ -58,24 +52,8 @@ public class UltraAbsorbentSpongeItem extends Item implements FluidModificationI
                 BlockState blockState;
                 if (this.fluid == Fluids.EMPTY) {
                     blockState = world.getBlockState(blockPos);
-                    if (blockState.getBlock() instanceof FluidDrainable && blockState.getBlock() == Blocks.WATER) {
-                        FluidDrainable fluidDrainable = (FluidDrainable)blockState.getBlock();
-                        ItemStack itemStack2 = fluidDrainable.tryDrainFluid(world, blockPos, blockState);
-                        if (!itemStack2.isEmpty()) {
-                            user.incrementStat(Stats.USED.getOrCreateStat(this));
-                            /*fluidDrainable.getBucketFillSound().ifPresent((sound) -> {
-                                user.playSound(sound, 1.0F, 1.0F);
-                            });*/
-                            user.playSound(SoundEvents.BLOCK_WET_GRASS_PLACE, 1F, 1F);
-                            world.emitGameEvent(user, GameEvent.FLUID_PICKUP, blockPos);
-                            absorbWater(user, world, blockPos);
-                            //ItemStack itemStack3 = ItemUsage.exchangeStack(itemStack, user, itemStack2);
-                            //if (!world.isClient) {
-                            //    Criteria.FILLED_BUCKET.trigger((ServerPlayerEntity)user, itemStack2);
-                            //}
+                    if (blockState.getBlock() instanceof FluidDrainable && blockState.getBlock() != Blocks.LAVA) {
 
-                            return TypedActionResult.success(user.getStackInHand(hand), world.isClient());
-                        }
                     }
 
                     return TypedActionResult.fail(itemStack);
@@ -89,7 +67,7 @@ public class UltraAbsorbentSpongeItem extends Item implements FluidModificationI
                         }
 
                         user.incrementStat(Stats.USED.getOrCreateStat(this));
-                        return TypedActionResult.success(getEmptiedStack(itemStack, user), world.isClient());
+                        return TypedActionResult.success(itemStack, world.isClient());
                     } else {
                         return TypedActionResult.fail(itemStack);
                     }
@@ -153,27 +131,6 @@ public class UltraAbsorbentSpongeItem extends Item implements FluidModificationI
         SoundEvent soundEvent = this.fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_EMPTY_LAVA : SoundEvents.ITEM_BUCKET_EMPTY;
         world.playSound(player, pos, soundEvent, SoundCategory.BLOCKS, 1.0F, 1.0F);
         world.emitGameEvent(player, GameEvent.FLUID_PLACE, pos);
-    }
-
-    private void absorbWater(PlayerEntity user, World world, BlockPos blockPos) {
-        for (int ew = 0; ew < 3; ew++) {
-            for (int ns = 0; ns < 3; ns++) {
-                for (int y = 0; y < 3; y++) {
-                    BlockPos blockPos1 = blockPos.east().down().south();
-                    blockPos1 = blockPos1.west(ew).up(y).north(ns);
-
-                    BlockState blockState1 = world.getBlockState(blockPos1);
-                    if (blockState1.getBlock() instanceof FluidDrainable && blockState1.getBlock() == Blocks.WATER) {
-                        FluidDrainable fluidDrainable = (FluidDrainable) blockState1.getBlock();
-                        fluidDrainable.tryDrainFluid(world, blockPos1, blockState1);
-
-                        world.emitGameEvent(user, GameEvent.FLUID_PICKUP, blockPos1);
-
-                        //world.setBlockState(blockPos1, Blocks.AIR.getDefaultState());
-                    }
-                }
-            }
-        }
     }
 
     @Override
