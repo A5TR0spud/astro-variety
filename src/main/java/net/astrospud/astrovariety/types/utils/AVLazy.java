@@ -2,7 +2,7 @@
 // copied from the deprecated method
 //
 
-package net.astrospud.astrovariety.types;
+package net.astrospud.astrovariety.types.utils;
 
 import com.google.common.base.Suppliers;
 import java.util.Objects;

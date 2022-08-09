@@ -1,6 +1,5 @@
-package net.astrospud.astrovariety.types;
+package net.astrospud.astrovariety.types.theoriginals;
 
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -10,8 +9,6 @@ import net.minecraft.item.*;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.ClickType;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
 
 public class RoseGoldArmorItem extends AVArmorItem {
 

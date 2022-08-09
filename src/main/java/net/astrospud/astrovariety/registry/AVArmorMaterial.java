@@ -1,6 +1,6 @@
 package net.astrospud.astrovariety.registry;
 
-import net.astrospud.astrovariety.types.AVLazy;
+import net.astrospud.astrovariety.types.utils.AVLazy;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Items;

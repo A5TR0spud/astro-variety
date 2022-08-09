@@ -1,6 +1,8 @@
 package net.astrospud.astrovariety.types.magicsupport;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.block.AirBlock;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -12,14 +14,14 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class WindPearlsItem extends ToggleItem {
-    String[] speeds = new String[]{"slow", "none", "speed"};
-    String[] winds = new String[]{"x+", "x-", "z+", "z-", "none"};
 
     public WindPearlsItem() {
         super(new FabricItemSettings().group(ItemGroup.TOOLS).fireproof().maxCount(1).rarity(Rarity.RARE));
@@ -32,41 +34,21 @@ public class WindPearlsItem extends ToggleItem {
 
             player.getItemCooldownManager().set(stack.getItem(), 100);
 
-            NbtCompound nbtCompound = stack.getOrCreateNbt();
-
-            String speedIndex = stack.getOrCreateNbt().getString("Speed");
-            int max = speeds.length;
-            nbtCompound.putString("Speed", speeds[(int) (Math.random() * max)]);
-
-            String windIndex = stack.getOrCreateNbt().getString("Wind");
-            max = winds.length;
-            nbtCompound.putString("Wind", winds[(int) (Math.random() * max)]);
-
-            if (speedIndex == "slow") {
-                player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 100, 0, false, false, true));
+            int count = 0;
+            for (int i = 0; i < player.getInventory().size(); i++) {
+                if (player.getInventory().getStack(i).getItem() == stack.getItem()) {
+                    count ++;
+                }
             }
-            if (speedIndex == "speed") {
-                player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 100, 0, false, false, true));
-            }
+
+            player.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 100, count-1, false, false, true));
+            player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 100, count-1, false, false, true));
         }
-        if (entity instanceof PlayerEntity player) {
-            String windIndex = stack.getOrCreateNbt().getString("Wind");
-
-            if (!(player.getAbilities().flying && (player.isCreative() || player.isSpectator()))) {
-                if (windIndex == "x+") {
-                    player.addVelocity(0.02, 0, 0);
-                }
-                if (windIndex == "x-") {
-                    player.addVelocity(-0.02, 0, 0);
-                }
-                if (windIndex == "z+") {
-                    player.addVelocity(0, 0, 0.02);
-                }
-                if (windIndex == "z-") {
-                    player.addVelocity(0, 0, -0.02);
-                }
-
-                player.addVelocity(0, 0.02, 0);
+        if (entity instanceof PlayerEntity player && toggle) {
+            if (player.fallDistance > player.getSafeFallDistance()*0.90f) {
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 19, 128, false, false, true));
+                //player.addVelocity(0D, 0.5D, 0D);
+                //player.setVelocity(new Vec3d(player.getVelocity().x, player.getVelocity().y * 0.1D, player.getVelocity().z));
             }
         }
     }

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CLC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:sponge"
+    },
+    "L": {
+      "item": "minecraft:magma_block"
+    }
+  },
+  "result": {
+    "item": "astrovariety:ultra_absorbent_sponge"
+  }
+}

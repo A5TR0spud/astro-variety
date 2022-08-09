@@ -1,31 +1,27 @@
-package net.astrospud.astrovariety.types;
+package net.astrospud.astrovariety.types.theoriginals;
 
 import net.astrospud.astrovariety.registry.AVArmorMaterial;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.text.NbtTextContent;
 import net.minecraft.text.Text;
 import net.minecraft.util.ClickType;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
-public class RoseGoldLeggingsArmorItem extends RoseGoldArmorItem {
+public class RoseGoldChestplateArmorItem extends RoseGoldArmorItem {
 
-    String[] modes = new String[]{"empty", "speed", "jump", "step"};
+    String[] modes = new String[]{"empty", "health", "mine", "attack"};
     //int modeIndex = 0;
 
-    public RoseGoldLeggingsArmorItem(Settings settings) {
-        super(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.LEGS, settings);
+    public RoseGoldChestplateArmorItem(Settings settings) {
+        super(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.CHEST, settings);
     }
 
     @Override

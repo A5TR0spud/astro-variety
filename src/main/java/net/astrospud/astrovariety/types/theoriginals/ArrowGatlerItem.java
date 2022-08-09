@@ -1,6 +1,5 @@
-package net.astrospud.astrovariety.types;
+package net.astrospud.astrovariety.types.theoriginals;
 
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -10,18 +9,9 @@ import net.minecraft.item.*;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.function.Predicate;
-
-import static net.minecraft.item.RangedWeaponItem.BOW_PROJECTILES;
 
 public class ArrowGatlerItem extends BowItem implements Vanishable{
     public ArrowGatlerItem(Settings settings) {

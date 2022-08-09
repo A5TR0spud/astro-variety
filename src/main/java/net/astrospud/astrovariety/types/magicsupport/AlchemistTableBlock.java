@@ -1,4 +1,4 @@
-package net.astrospud.astrovariety.types;
+package net.astrospud.astrovariety.types.magicsupport;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

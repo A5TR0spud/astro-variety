@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OCO",
+    "CLC",
+    "OCO"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:sponge"
+    },
+    "L": {
+      "item": "minecraft:magma_block"
+    },
+    "O": {
+      "item": "minecraft:crying_obsidian"
+    }
+  },
+  "result": {
+    "item": "astrovariety:obsidian_sponge"
+  }
+}

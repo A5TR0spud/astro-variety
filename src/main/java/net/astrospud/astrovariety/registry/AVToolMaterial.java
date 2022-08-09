@@ -2,7 +2,7 @@ package net.astrospud.astrovariety.registry;
 
 import java.util.function.Supplier;
 
-import net.astrospud.astrovariety.types.AVLazy;
+import net.astrospud.astrovariety.types.utils.AVLazy;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;

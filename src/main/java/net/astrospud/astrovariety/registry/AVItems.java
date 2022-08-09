@@ -1,8 +1,10 @@
 package net.astrospud.astrovariety.registry;
 
 import net.astrospud.astrovariety.AstroVariety;
-import net.astrospud.astrovariety.types.*;
+import net.astrospud.astrovariety.types.theoriginals.*;
 import net.astrospud.astrovariety.types.magicsupport.*;
+import net.astrospud.astrovariety.types.unique.ObsidianSpongeItem;
+import net.astrospud.astrovariety.types.unique.UltraAbsorbentSpongeItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
@@ -12,7 +14,7 @@ import net.minecraft.util.registry.Registry;
 
 public class AVItems {
     //rose gold
-    /*public static final Item ROSE_GOLD_HELMET = registerItem("charged_rose_gold_helmet",
+    public static final Item ROSE_GOLD_HELMET = registerItem("charged_rose_gold_helmet",
             new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.HEAD,
                     new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
     public static final Item ROSE_GOLD_CHESTPLATE = registerItem("charged_rose_gold_chestplate",
@@ -25,7 +27,7 @@ public class AVItems {
             new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.FEET,
                     new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
     public static final Item ROSE_GOLD_INGOT = registerItem("rose_gold_ingot",
-            new Item(new FabricItemSettings().group(ItemGroup.MATERIALS)));*/
+            new Item(new FabricItemSettings().group(ItemGroup.MATERIALS)));
 
     //blaze
     public static final Item EMBER_INGOT = registerItem("ember_ingot",
@@ -103,6 +105,10 @@ public class AVItems {
             new DwarvenPickaxeItem());
     public static final Item WIND_PEARLS = registerItem("wind_pearls",
             new WindPearlsItem());
+    public static final Item ULTRA_ABSORBENT_SPONGE = registerItem("ultra_absorbent_sponge",
+            new UltraAbsorbentSpongeItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1)));
+    public static final Item OBSIDIAN_SPONGE = registerItem("obsidian_sponge",
+            new ObsidianSpongeItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(AstroVariety.MOD_ID, name), item);

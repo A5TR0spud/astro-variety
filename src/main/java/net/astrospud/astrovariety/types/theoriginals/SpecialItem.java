@@ -1,4 +1,4 @@
-package net.astrospud.astrovariety.types;
+package net.astrospud.astrovariety.types.theoriginals;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
