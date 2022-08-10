@@ -1,15 +1,14 @@
-package net.astrospud.astrovariety.types.unique;
+package net.astrospud.astrovariety.types.endless_things;
 
-import com.google.common.collect.Lists;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.*;
+import net.minecraft.item.FluidModificationItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -18,7 +17,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Pair;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -30,14 +28,10 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Queue;
-
-import static net.minecraft.block.Block.dropStacks;
-
-public class UltraAbsorbentSpongeItem extends Item implements FluidModificationItem {
+public class ObsidianSpongeItem extends Item implements FluidModificationItem {
     private final Fluid fluid = Fluids.EMPTY;
 
-    public UltraAbsorbentSpongeItem(/*Fluid fluid, */Item.Settings settings) {
+    public ObsidianSpongeItem(/*Fluid fluid, */Settings settings) {
         super(settings);
         //this.fluid = fluid;
     }
@@ -58,7 +52,7 @@ public class UltraAbsorbentSpongeItem extends Item implements FluidModificationI
                 BlockState blockState;
                 if (this.fluid == Fluids.EMPTY) {
                     blockState = world.getBlockState(blockPos);
-                    if (blockState.getBlock() instanceof FluidDrainable && blockState.getBlock() == Blocks.WATER) {
+                    if (blockState.getBlock() instanceof FluidDrainable && blockState.getBlock() == Blocks.LAVA) {
                         FluidDrainable fluidDrainable = (FluidDrainable)blockState.getBlock();
                         ItemStack itemStack2 = fluidDrainable.tryDrainFluid(world, blockPos, blockState);
                         if (!itemStack2.isEmpty()) {
@@ -66,7 +60,7 @@ public class UltraAbsorbentSpongeItem extends Item implements FluidModificationI
                             /*fluidDrainable.getBucketFillSound().ifPresent((sound) -> {
                                 user.playSound(sound, 1.0F, 1.0F);
                             });*/
-                            user.playSound(SoundEvents.BLOCK_WET_GRASS_PLACE, 1F, 1F);
+                            user.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 1F, 1F);
                             world.emitGameEvent(user, GameEvent.FLUID_PICKUP, blockPos);
                             absorbWater(user, world, blockPos);
                             //ItemStack itemStack3 = ItemUsage.exchangeStack(itemStack, user, itemStack2);
@@ -77,9 +71,9 @@ public class UltraAbsorbentSpongeItem extends Item implements FluidModificationI
                             return TypedActionResult.success(user.getStackInHand(hand), world.isClient());
                         }
                     }
-
                     return TypedActionResult.fail(itemStack);
-                } else {
+                }
+                else {
                     blockState = world.getBlockState(blockPos);
                     BlockPos blockPos3 = blockState.getBlock() instanceof FluidFillable && this.fluid == Fluids.WATER ? blockPos : blockPos2;
                     if (this.placeFluid(user, world, blockPos3, blockHitResult)) {
@@ -163,7 +157,7 @@ public class UltraAbsorbentSpongeItem extends Item implements FluidModificationI
                     blockPos1 = blockPos1.west(ew).up(y).north(ns);
 
                     BlockState blockState1 = world.getBlockState(blockPos1);
-                    if (blockState1.getBlock() instanceof FluidDrainable && blockState1.getBlock() == Blocks.WATER) {
+                    if (blockState1.getBlock() instanceof FluidDrainable && blockState1.getBlock() == Blocks.LAVA) {
                         FluidDrainable fluidDrainable = (FluidDrainable) blockState1.getBlock();
                         fluidDrainable.tryDrainFluid(world, blockPos1, blockState1);
 

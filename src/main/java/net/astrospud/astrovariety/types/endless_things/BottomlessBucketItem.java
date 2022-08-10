@@ -1,4 +1,4 @@
-package net.astrospud.astrovariety.types.unique;
+package net.astrospud.astrovariety.types.endless_things;
 
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;

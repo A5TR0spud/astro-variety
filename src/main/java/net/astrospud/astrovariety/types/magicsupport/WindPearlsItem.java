@@ -1,6 +1,7 @@
 package net.astrospud.astrovariety.types.magicsupport;
 
 import com.ibm.icu.text.MessagePattern;
+import net.astrospud.astrovariety.registry.AVStatusEffects;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Blocks;
@@ -51,10 +52,7 @@ public class WindPearlsItem extends ToggleItem {
                     count ++;
                 }
             }
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 100, count-1, false, false, true));
-
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 100, count-1, false, false, true));
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 100, count-1, false, false, true));
+            player.addStatusEffect(new StatusEffectInstance(AVStatusEffects.WIND_MOBILITTY, 100, count-1, false, false, true));
         }
         if (entity instanceof PlayerEntity player && toggle) {
             if (player.fallDistance > player.getSafeFallDistance()*0.90f) {

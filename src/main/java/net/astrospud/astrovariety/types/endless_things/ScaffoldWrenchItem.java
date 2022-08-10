@@ -1,4 +1,4 @@
-package net.astrospud.astrovariety.types.unique;
+package net.astrospud.astrovariety.types.endless_things;
 
 import net.astrospud.astrovariety.AstroVariety;
 import net.minecraft.advancement.criterion.Criteria;
@@ -6,12 +6,10 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.BlockSoundGroup;
@@ -32,8 +30,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Stream;
 
 public class ScaffoldWrenchItem extends Item {
     private static final String BLOCK_ENTITY_TAG_KEY = "BlockEntityTag";

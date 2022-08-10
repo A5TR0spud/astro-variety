@@ -1,6 +1,7 @@
 package net.astrospud.astrovariety.mixin;
 
 import net.astrospud.astrovariety.registry.AVItems;
+import net.astrospud.astrovariety.registry.AVStatusEffects;
 import net.astrospud.astrovariety.util.AVUtil;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -47,6 +48,23 @@ public abstract class AVLivingEntityMixin extends Entity {
 
     protected AVLivingEntityMixin(EntityType<? extends Entity> entityType, World world){
         super(entityType, world);
+    }
+
+    @Inject(at = @At(value = "RETURN"), method = "getJumpBoostVelocityModifier", cancellable = true)
+    public void avgetJumpBoostVelocityModifierMixin(CallbackInfoReturnable<Double> cir) {
+        if ((Object) this instanceof LivingEntity entity) {
+            double ffg = entity.hasStatusEffect(AVStatusEffects.WIND_MOBILITTY) ? (double) (0.1F * (float) (entity.getStatusEffect(AVStatusEffects.WIND_MOBILITTY).getAmplifier() + 1)) : 0.0;
+            cir.setReturnValue(cir.getReturnValue()+ffg);
+        }
+    }
+
+    @Inject(at = @At(value = "RETURN"), method = "computeFallDamage", cancellable = true)
+    protected void avcomputeFallDamageMixin(float fallDistance, float damageMultiplier, CallbackInfoReturnable<Integer> cir) {
+        if ((Object) this instanceof LivingEntity entity) {
+            StatusEffectInstance statusEffectInstance = entity.getStatusEffect(AVStatusEffects.WIND_MOBILITTY);
+            float f = statusEffectInstance == null ? 0.0F : (float) (statusEffectInstance.getAmplifier() + 1);
+            cir.setReturnValue(MathHelper.ceil(((((float)cir.getReturnValue()-0.5f)/damageMultiplier) - f) * damageMultiplier));
+        }
     }
 
     @Inject(at = @At(value = "HEAD"), method = "damage", cancellable = true)
@@ -112,6 +130,11 @@ public abstract class AVLivingEntityMixin extends Entity {
     @Inject(at = @At(value = "HEAD"), method = "tick")
     public void avtick(CallbackInfo cir){
         if ((Object) this instanceof LivingEntity entity) {
+
+            if (entity.hasStatusEffect(AVStatusEffects.WIND_MOBILITTY)) {
+                entity.airStrafingSpeed = entity.getMovementSpeed()/5;
+            }
+
             Iterable<ItemStack> armorItems = entity.getArmorItems();
             ArrayList<ItemStack> armor = new ArrayList<>();
             armorItems.forEach(armor::add);

@@ -72,5 +72,6 @@
   "tooltip.astrovariety.wind_pearls_2": "the cost of your strength",
 
   "effect.astrovariety.bleeding": "Growth",
-  "effect.astrovariety.nanomachines": "Nano Repair"
+  "effect.astrovariety.nanomachines": "Nano Repair",
+  "effect.astrovariety.wind_mobility": "Wind Mobility"
 }
