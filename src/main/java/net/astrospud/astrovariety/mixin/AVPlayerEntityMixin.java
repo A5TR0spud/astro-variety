@@ -29,7 +29,6 @@ import java.util.Optional;
 
 @Mixin(PlayerEntity.class)
 public abstract class AVPlayerEntityMixin extends LivingEntity{
-
     protected AVPlayerEntityMixin(EntityType<? extends PlayerEntity> entityType, World world){
         super(entityType, world);
     }

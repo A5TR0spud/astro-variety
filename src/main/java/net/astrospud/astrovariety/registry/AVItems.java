@@ -119,7 +119,7 @@ public class AVItems {
     public static final Item BOTTOMLESS_LAVA_BUCKET = registerItem("bottomless_lava_bucket",
             new BottomlessBucketItem(Fluids.LAVA, new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
     public static final Item SCAFFOLD_WRENCH = registerItem("scaffold_wrench",
-            new ScaffoldWrenchItem(Blocks.SCAFFOLDING, new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
+            new ScaffoldWrenchItem(Blocks.MAGMA_BLOCK, new FabricItemSettings()./*group(ItemGroup.TOOLS).*/maxCount(1).fireproof()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(AstroVariety.MOD_ID, name), item);

@@ -1,37 +1,54 @@
 package net.astrospud.astrovariety.mixin;
 
-import net.minecraft.block.AbstractBlock;
+import com.google.common.collect.ImmutableList;
+import net.astrospud.astrovariety.AstroVariety;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ScaffoldingBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.mob.PiglinBrain;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.WorldAccess;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(Block.class)
-public abstract class ScaffoldingBlockMixin extends AbstractBlock {
-    public ScaffoldingBlockMixin(AbstractBlock.Settings settings) {
+@Mixin(ScaffoldingBlock.class)
+public abstract class ScaffoldingBlockMixin extends Block {
+    private static BooleanProperty DO_DROPS = null;
+    private static BlockState state = null;
+
+    public ScaffoldingBlockMixin(Settings settings) {
         super(settings);
+        this.setDefaultState((BlockState)((BlockState)((BlockState)((BlockState)this.stateManager.getDefaultState()).with(DO_DROPS, true))));
+        state = this.getDefaultState();
     }
 
-    /*@Inject(at = @At("HEAD"), method = "afterBreak", cancellable = true)
-    publ*/
+    @Inject(at = @At("RETURN"), method = "appendProperties")
+    public void avappendPropertiesMixin(StateManager.Builder<Block, BlockState> builder, CallbackInfo cir) {
+        builder.add(new Property[]{DO_DROPS});
+    }
+
+    static {
+        DO_DROPS = AstroVariety.DO_DROPS;
+    }
+
+    /*@Override
+    public final Identifier getLootTableId() {
+        boolean bool = !getDoDrops();
+        if (bool) {
+            return null;
+        }
+        return super.getLootTableId();
+    }*/
+
+    public boolean getDoDrops() {
+        return (Boolean)state.get(DO_DROPS);
+    }
 }

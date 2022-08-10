@@ -6,11 +6,13 @@
   "mixins": [
     "AVLivingEntityMixin",
     "AVPlayerEntityMixin",
+    "AbstractBlockMixin",
     "ScaffoldingBlockMixin"
   ],
   "client": [
     "AVLivingEntityMixin",
     "AVPlayerEntityMixin",
+    "AbstractBlockMixin",
     "ScaffoldingBlockMixin"
   ],
   "injectors": {
