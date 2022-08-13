@@ -1,6 +1,7 @@
-package net.astrospud.astrovariety.registry;
+package net.astrospud.astrovariety.client;
 
 
+import net.astrospud.astrovariety.registry.AVEntities;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

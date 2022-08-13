@@ -24,6 +24,7 @@ public class AstroVariety implements ModInitializer {
 		AVStatusEffects.register();
 		AVProperties.registerModProperies();
 		AVEntities.registerModEntities();
+		AVEntities.registerRenderers();
 		AVDispenserBehaviour.registerModDispensorProps();
 	}
 }
