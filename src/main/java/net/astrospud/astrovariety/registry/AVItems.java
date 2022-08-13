@@ -6,6 +6,7 @@ import net.astrospud.astrovariety.types.magicsupport.*;
 import net.astrospud.astrovariety.types.endless_things.*;
 import net.astrospud.astrovariety.types.unique.CorruptorItem;
 import net.astrospud.astrovariety.types.unique.DynamiteItem;
+import net.astrospud.astrovariety.types.unique.SlowballItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EquipmentSlot;
@@ -124,7 +125,9 @@ public class AVItems {
 
     //unique
     public static final Item DYNAMITE = registerItem("dynamite",
-            new DynamiteItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(64), AVEntities.DYNAMITE));
+            new DynamiteItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(64), AVEntities.DYNAMITE));
+    public static final Item SLOW_BALL = registerItem("slow_ball",
+            new SlowballItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(64), AVEntities.SLOW_BALL));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(AstroVariety.MOD_ID, name), item);

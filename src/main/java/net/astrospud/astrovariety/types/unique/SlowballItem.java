@@ -1,27 +1,21 @@
 package net.astrospud.astrovariety.types.unique;
 
-import net.astrospud.astrovariety.AstroVariety;
-import net.astrospud.astrovariety.registry.AVEntities;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class DynamiteItem extends Item {
+public class SlowballItem extends Item {
 
     final EntityType<? extends ThrownItemEntity> entityType;
 
-    public DynamiteItem(Settings settings, EntityType<? extends ThrownItemEntity> entityType) {
+    public SlowballItem(Settings settings, EntityType<? extends ThrownItemEntity> entityType) {
         super(settings);
         this.entityType = entityType;
     }
@@ -34,9 +28,9 @@ public class DynamiteItem extends Item {
             stack.decrement(1);
         }
         if (!world.isClient()) {
-            final DynamiteEntity entity = new DynamiteEntity(entityType, user, world);
+            final SlowBallEntity entity = new SlowBallEntity(entityType, user, world);
             entity.setItem(stack);
-            entity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 0.75F, 1.0F);
+            entity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 0.0F);
             world.spawnEntity(entity);
         }
         return TypedActionResult.success(stack, world.isClient());

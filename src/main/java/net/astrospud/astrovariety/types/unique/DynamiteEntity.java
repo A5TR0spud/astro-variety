@@ -43,33 +43,25 @@ public class DynamiteEntity extends ThrownItemEntity {
     protected void onBlockHit(BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
         explode();
+        this.discard();
     }
 
     @Override
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
         explode();
+        this.discard();
     }
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
-        explode();
-    }
-
-    @Override
-    public boolean shouldRender(double distance) {
-        return super.shouldRender(distance);
-    }
-
-    @Override
-    public boolean shouldRender(double cameraX, double cameraY, double cameraZ) {
-        return super.shouldRender(cameraX, cameraY, cameraZ);
-    }
-
-    public void explode() {
-        float f = 0.75F;
-        this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), f, Explosion.DestructionType.BREAK);
+        entityHitResult.getEntity().damage(DamageSource.explosion(explode()), 4);
         this.discard();
+    }
+
+    public Explosion explode() {
+        float f = 0.75F;
+        return this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), f, Explosion.DestructionType.BREAK);
     }
 }
