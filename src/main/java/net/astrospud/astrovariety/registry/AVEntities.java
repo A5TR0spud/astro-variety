@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class AVEntities {
-    public static final EntityType<DynamiteEntity> DYNAMITE = registerDynamite("throwable_honeycomb_torch");
+    public static final EntityType<DynamiteEntity> DYNAMITE = registerDynamite("dynamite");
 
     //register("snowball", EntityType.Builder.create(SnowballEntity::new, SpawnGroup.MISC).setDimensions(0.25F, 0.25F).maxTrackingRange(4).trackingTickInterval(10));
 
