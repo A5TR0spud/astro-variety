@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "EEE",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "astrovariety:dynamite"
+    }
+  },
+  "result": {
+    "item": "minecraft:tnt"
+  }
+}
