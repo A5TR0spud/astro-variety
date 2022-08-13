@@ -2,18 +2,25 @@ package net.astrospud.astrovariety.mixin;
 
 import com.google.common.collect.ImmutableList;
 import net.astrospud.astrovariety.AstroVariety;
+import net.astrospud.astrovariety.registry.AVItems;
+import net.astrospud.astrovariety.registry.AVProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ScaffoldingBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -35,11 +42,14 @@ public abstract class ScaffoldingBlockMixin extends Block {
         builder.add(new Property[]{DO_DROPS});
     }
 
+
+
+
     static {
-        DO_DROPS = AstroVariety.DO_DROPS;
+        DO_DROPS = AVProperties.DO_DROPS;
     }
 
-    /*@Override
+    /*@Overwrite
     public final Identifier getLootTableId() {
         boolean bool = !getDoDrops();
         if (bool) {

@@ -1,6 +1,9 @@
 package net.astrospud.astrovariety.types.endless_things;
 
 import net.astrospud.astrovariety.AstroVariety;
+import net.astrospud.astrovariety.registry.AVBlocks;
+import net.astrospud.astrovariety.registry.AVProperties;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -20,9 +23,11 @@ import net.minecraft.state.property.Property;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.UseAction;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
@@ -31,33 +36,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class ScaffoldWrenchItem extends Item {
-    private static final String BLOCK_ENTITY_TAG_KEY = "BlockEntityTag";
-    public static final String BLOCK_STATE_TAG_KEY = "BlockStateTag";
-    /** @deprecated */
-    @Deprecated
-    private final Block block;
-    public ScaffoldWrenchItem(Block block, Settings settings) {
-        super(settings);
-        this.block = block;
+public class ScaffoldWrenchItem extends ScaffoldingItem {
+    public ScaffoldWrenchItem(Settings settings) {
+        super(Blocks.SCAFFOLDING, settings);
     }
-
-    @Override
-    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        return stack;
-    }
-
-    /*@Override
-    protected boolean postPlacement(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
-        stack.setCount(2);
-        return super.postPlacement(pos, world, player, stack, state);
-    }*/
 
     @Override
     public String getTranslationKey() {
         return "item.astrovariety.scaffold_wrench";
     }
 
+    @Override
     public ActionResult place(ItemPlacementContext context) {
         if (!context.canPlace()) {
             return ActionResult.FAIL;
@@ -82,12 +71,14 @@ public class ScaffoldWrenchItem extends Item {
                         this.postPlacement(blockPos, world, playerEntity, itemStack, blockState2);
                         blockState2.getBlock().onPlaced(world, blockPos, blockState2, playerEntity, itemStack);
                         if (playerEntity instanceof ServerPlayerEntity) {
-                            Criteria.PLACED_BLOCK.trigger((ServerPlayerEntity) playerEntity, blockPos, itemStack);
+                            Criteria.PLACED_BLOCK.trigger((ServerPlayerEntity)playerEntity, blockPos, itemStack);
                         }
                     }
 
                     BlockSoundGroup blockSoundGroup = blockState2.getSoundGroup();
                     world.playSound(playerEntity, blockPos, this.getPlaceSound(blockState2), SoundCategory.BLOCKS, (blockSoundGroup.getVolume() + 1.0F) / 2.0F, blockSoundGroup.getPitch() * 0.8F);
+
+                    blockState2 = blockState2.with(AVProperties.DO_DROPS, false);
                     world.emitGameEvent(GameEvent.BLOCK_PLACE, blockPos, GameEvent.Emitter.of(playerEntity, blockState2));
 
                     return ActionResult.success(world.isClient);
@@ -113,7 +104,9 @@ public class ScaffoldWrenchItem extends Item {
                 }
             }
         }
-        blockState = blockState.with(AstroVariety.DO_DROPS, false);
+
+        blockState = blockState.with(AVProperties.DO_DROPS, false);
+
         if (blockState != state) {
             world.setBlockState(pos, blockState, 2);
         }
@@ -127,6 +120,26 @@ public class ScaffoldWrenchItem extends Item {
         }).orElse(state);
     }
 
+    @Override
+    public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
+        //super.appendStacks(group, stacks);
+        if (group == ItemGroup.TOOLS || group == ItemGroup.SEARCH) {
+            stacks.add(new ItemStack(this.asItem()));
+        }
+    }
+
+    @Override
+    public void appendBlocks(Map<Block, Item> map, Item item) {
+        //super.appendBlocks(map, item);
+        //Block SCAFFOLDING = register("scaffolding1", new ScaffoldingBlock(AbstractBlock.Settings.of(Material.DECORATION, MapColor.PALE_YELLOW).noCollision().sounds(BlockSoundGroup.SCAFFOLDING).dynamicBounds()));
+        //map.put(ScaffoldingBlock.getBlockFromItem(this), this.asItem());
+    }
+
+    /*private static Block register(String id, Block block) {
+        return (Block) Registry.register(Registry.BLOCK, id, block);
+    }*/
+
+    @Override
     public ItemPlacementContext getPlacementContext(ItemPlacementContext context) {
         BlockPos blockPos = context.getBlockPos();
         World world = context.getWorld();
@@ -173,110 +186,46 @@ public class ScaffoldWrenchItem extends Item {
         }
     }
 
+    @Override
     protected boolean checkStatePlacement() {
         return false;
     }
 
-
-
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        ActionResult actionResult = this.place(new ItemPlacementContext(context));
-        if (!actionResult.isAccepted() && this.isFood()) {
-            ActionResult actionResult2 = this.use(context.getWorld(), context.getPlayer(), context.getHand()).getResult();
-            return actionResult2 == ActionResult.CONSUME ? ActionResult.CONSUME_PARTIAL : actionResult2;
-        } else {
-            return actionResult;
-        }
-    }
-
-    protected SoundEvent getPlaceSound(BlockState state) {
-        return state.getSoundGroup().getPlaceSound();
-    }
-
-    protected boolean postPlacement(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
-        return writeNbtToBlockEntity(world, player, pos, stack);
-    }
-
-    @Nullable
-    protected BlockState getPlacementState(ItemPlacementContext context) {
-        BlockState blockState = this.getBlock().getPlacementState(context);
-        return blockState != null && this.canPlace(context, blockState) ? blockState : null;
-    }
-
+    @Override
     protected boolean canPlace(ItemPlacementContext context, BlockState state) {
         PlayerEntity playerEntity = context.getPlayer();
         ShapeContext shapeContext = playerEntity == null ? ShapeContext.absent() : ShapeContext.of(playerEntity);
         return (!this.checkStatePlacement() || state.canPlaceAt(context.getWorld(), context.getBlockPos())) && context.getWorld().canPlace(state, context.getBlockPos(), shapeContext);
     }
 
-    protected boolean place(ItemPlacementContext context, BlockState state) {
-        return context.getWorld().setBlockState(context.getBlockPos(), state, 11);
-    }
-
-    public static boolean writeNbtToBlockEntity(World world, @Nullable PlayerEntity player, BlockPos pos, ItemStack stack) {
-        MinecraftServer minecraftServer = world.getServer();
-        if (minecraftServer == null) {
-            return false;
-        } else {
-            NbtCompound nbtCompound = getBlockEntityNbt(stack);
-            if (nbtCompound != null) {
-                BlockEntity blockEntity = world.getBlockEntity(pos);
-                if (blockEntity != null) {
-                    if (!world.isClient && blockEntity.copyItemDataRequiresOperator() && (player == null || !player.isCreativeLevelTwoOp())) {
-                        return false;
-                    }
-
-                    NbtCompound nbtCompound2 = blockEntity.createNbt();
-                    NbtCompound nbtCompound3 = nbtCompound2.copy();
-                    nbtCompound2.copyFrom(nbtCompound);
-                    if (!nbtCompound2.equals(nbtCompound3)) {
-                        blockEntity.readNbt(nbtCompound2);
-                        blockEntity.markDirty();
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-    }
-
-    public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
-        if (this.isIn(group)) {
-            this.getBlock().appendStacks(group, stacks);
-        }
-
-    }
-
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        super.appendTooltip(stack, world, tooltip, context);
-        this.getBlock().appendTooltip(stack, world, tooltip, context);
-    }
-
+    @Override
     public Block getBlock() {
-        return this.block;
+        return Blocks.SCAFFOLDING;
     }
 
-    public void appendBlocks(Map<Block, Item> map, Item item) {
-        map.put(this.getBlock(), item);
+    @Override
+    protected boolean postPlacement(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
+        return super.postPlacement(pos, world, player, stack, state);
     }
 
-    public boolean canBeNested() {
-        return !(this.block instanceof ShulkerBoxBlock);
+    @Override
+    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
+        return super.finishUsing(stack, world, user);
+    }
+
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        return super.useOnBlock(context);
     }
 
     @Nullable
-    public static NbtCompound getBlockEntityNbt(ItemStack stack) {
-        return stack.getSubNbt("BlockEntityTag");
+    @Override
+    protected BlockState getPlacementState(ItemPlacementContext context) {
+        return super.getPlacementState(context);
     }
 
-    public static void setBlockEntityNbt(ItemStack stack, BlockEntityType<?> blockEntityType, NbtCompound tag) {
-        if (tag.isEmpty()) {
-            stack.removeSubNbt("BlockEntityTag");
-        } else {
-            BlockEntity.writeIdToNbt(tag, blockEntityType);
-            stack.setSubNbt("BlockEntityTag", tag);
-        }
-
+    @Override
+    public UseAction getUseAction(ItemStack stack) {
+        return super.getUseAction(stack);
     }
 }

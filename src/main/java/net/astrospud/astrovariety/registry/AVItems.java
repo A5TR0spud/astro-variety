@@ -4,6 +4,8 @@ import net.astrospud.astrovariety.AstroVariety;
 import net.astrospud.astrovariety.types.theoriginals.*;
 import net.astrospud.astrovariety.types.magicsupport.*;
 import net.astrospud.astrovariety.types.endless_things.*;
+import net.astrospud.astrovariety.types.unique.CorruptorItem;
+import net.astrospud.astrovariety.types.unique.DynamiteItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EquipmentSlot;
@@ -28,7 +30,7 @@ public class AVItems {
             new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.FEET,
                     new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
     public static final Item ROSE_GOLD_INGOT = registerItem("rose_gold_ingot",
-            new Item(new FabricItemSettings().group(ItemGroup.MATERIALS)));
+            new Item(new FabricItemSettings()));
 
     //blaze
     public static final Item EMBER_INGOT = registerItem("ember_ingot",
@@ -92,7 +94,7 @@ public class AVItems {
 
     //talismans
     public static final Item TALISMAN_OF_DECAY = registerItem("talisman_of_decay",
-            new TalismanItem("decay")); //decay exists as an extant form of life... you cannot kill me in a way that matters
+            new DecayTalismanItem()); //decay exists as an extant form of life... you cannot kill me in a way that matters
 
     //public static final Item TALISMAN_OF_ = registerItem("talisman_of_",
             //new TalismanItem("")); //failure is the opportunity to begin again... don’t die just yet
@@ -118,7 +120,11 @@ public class AVItems {
     public static final Item BOTTOMLESS_LAVA_BUCKET = registerItem("bottomless_lava_bucket",
             new BottomlessBucketItem(Fluids.LAVA, new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
     public static final Item SCAFFOLD_WRENCH = registerItem("scaffold_wrench",
-            new ScaffoldWrenchItem(Blocks.MAGMA_BLOCK, new FabricItemSettings()./*group(ItemGroup.TOOLS).*/maxCount(1).fireproof()));
+            new ScaffoldWrenchItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
+
+    //unique
+    public static final Item DYNAMITE = registerItem("dynamite",
+            new DynamiteItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(64), AVEntities.DYNAMITE));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(AstroVariety.MOD_ID, name), item);

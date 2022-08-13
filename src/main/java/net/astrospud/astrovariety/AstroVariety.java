@@ -1,11 +1,7 @@
 package net.astrospud.astrovariety;
 
-import net.astrospud.astrovariety.registry.AVBlocks;
-import net.astrospud.astrovariety.registry.AVItems;
-import net.astrospud.astrovariety.registry.AVStatusEffects;
+import net.astrospud.astrovariety.registry.*;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.state.property.BooleanProperty;
-import org.apache.logging.log4j.core.config.Property;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +11,6 @@ public class AstroVariety implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final String MOD_ID = "astrovariety";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	public static final BooleanProperty DO_DROPS = BooleanProperty.of("do_drops");
 
 	@Override
 	public void onInitialize() {
@@ -27,5 +22,8 @@ public class AstroVariety implements ModInitializer {
 		AVItems.registerModItems();
 		AVBlocks.registerModBlocks();
 		AVStatusEffects.register();
+		AVProperties.registerModProperies();
+		AVEntities.registerModEntities();
+		AVDispenserBehaviour.registerModDispensorProps();
 	}
 }
