@@ -2,6 +2,7 @@ package net.astrospud.astrovariety.mixin;
 
 import net.astrospud.astrovariety.registry.AVItems;
 import net.astrospud.astrovariety.registry.AVStatusEffects;
+import net.astrospud.astrovariety.types.endless_things.ScaffoldBreakerItem;
 import net.astrospud.astrovariety.util.AVUtil;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -130,7 +131,6 @@ public abstract class AVLivingEntityMixin extends Entity {
     @Inject(at = @At(value = "HEAD"), method = "tick")
     public void avtick(CallbackInfo cir){
         if ((Object) this instanceof LivingEntity entity) {
-
             if (entity.hasStatusEffect(AVStatusEffects.WIND_MOBILITTY)) {
                 entity.airStrafingSpeed = entity.getMovementSpeed()/5;
             }

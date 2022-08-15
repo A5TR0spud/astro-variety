@@ -7,13 +7,15 @@
     "AVLivingEntityMixin",
     "AVPlayerEntityMixin",
     "BlockMixin",
-    "ScaffoldingBlockMixin"
+    "ScaffoldingBlockMixin",
+    "WorldMixin"
   ],
   "client": [
     "AVLivingEntityMixin",
     "AVPlayerEntityMixin",
     "BlockMixin",
-    "ScaffoldingBlockMixin"
+    "ScaffoldingBlockMixin",
+    "WorldMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -26,7 +26,7 @@ public class ScaffoldBreakerItem extends Item {
 
         if (state.contains(AVProperties.DO_DROPS)) {
             if (!(Boolean)state.get(AVProperties.DO_DROPS) && block == Blocks.SCAFFOLDING) {
-                world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                world.setBlockState(pos, fluid.getBlockState());
                 removeScaffold(pos.up(), world);
                 removeScaffold(pos.down(), world);
 
@@ -46,7 +46,7 @@ public class ScaffoldBreakerItem extends Item {
 
         if (state.contains(AVProperties.DO_DROPS)) {
             if (!(Boolean)state.get(AVProperties.DO_DROPS) && block == Blocks.SCAFFOLDING) {
-                world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                world.setBlockState(pos, fluid.getBlockState());
                 removeScaffold(pos.up(), world);
                 removeScaffold(pos.down(), world);
 

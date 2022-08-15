@@ -45,7 +45,6 @@ public abstract class BlockMixin extends AbstractBlock{
     @Inject(at = @At("HEAD"), method = "dropStack", cancellable = true)
     private static void avdropStack(World world, BlockPos pos, ItemStack stack, CallbackInfo cir) {
         BlockState state = world.getBlockState(pos);
-        AstroVariety.LOGGER.info(String.valueOf(state));
         boolean contains = (Boolean)state.contains(AVProperties.DO_DROPS);
 
         if (contains || state.getBlock() == Blocks.SCAFFOLDING) {
@@ -67,4 +66,17 @@ public abstract class BlockMixin extends AbstractBlock{
             }
         }
     }
+
+    /*@Inject(at = @At("HEAD"), method = "replace", cancellable = true)
+    public static void avreplaceMixin(BlockState state, BlockState newState, WorldAccess world, BlockPos pos, int flags, int maxUpdateDepth, CallbackInfo cir) {
+        if (newState != state) {
+            if (newState.isAir()) {
+                if (!world.isClient()) {
+                    world.breakBlock(pos, (flags & 32) == 0, (Entity)null, maxUpdateDepth);
+                }
+            } else {
+                world.setBlockState(pos, newState, flags & -33, maxUpdateDepth);
+            }
+        }
+    }*/
 }

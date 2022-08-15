@@ -33,19 +33,6 @@ public abstract class AVPlayerEntityMixin extends LivingEntity{
         super(entityType, world);
     }
 
-    /*@ModifyVariable(at = @At("RETURN"), ordinal = 0, method = "getBlockBreakingSpeed")
-    public float AVgetBlockBreakingSpeedMixin(float f, BlockState block) {
-        if ((Object)this instanceof PlayerEntity entity) {
-            Iterable<ItemStack> armorItems = entity.getArmorItems();
-            ArrayList<ItemStack> armor = new ArrayList<>();
-            armorItems.forEach(armor::add);
-            if (AVUtil.boolDamageRoseGold(entity, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 2, 1, true, true)) {
-                f *= 20f;
-            }
-        }
-        return f;
-    }*/
-
     @Inject(at = @At("RETURN"), method = "getBlockBreakingSpeed", cancellable = true)
     void AVgetBlockBreakingSpeedMixin(BlockState block, CallbackInfoReturnable<Float> cir) {
         float f = 1;
