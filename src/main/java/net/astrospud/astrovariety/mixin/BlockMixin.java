@@ -9,10 +9,12 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Property;
@@ -55,18 +57,47 @@ public abstract class BlockMixin extends AbstractBlock{
     private static void avdropStack(World world, BlockPos pos, ItemStack stack, CallbackInfo cir) {
         BlockState state = world.getBlockState(pos);
         state.updateNeighbors(world, pos, 6);
-        state.getProperties();
-        state.getBlock().getDefaultState();
-
-        Boolean contains = state.contains(AVProperties.DO_DROPS);
+        AstroVariety.LOGGER.info(String.valueOf(state));
+        boolean contains = (Boolean)state.contains(AVProperties.DO_DROPS);
 
         if (contains || state.getBlock() == Blocks.SCAFFOLDING) {
-            Boolean do_drops = state.get(AVProperties.DO_DROPS);
+            state = world.getBlockState(pos);
+            boolean do_drops = (Boolean)state.get(AVProperties.DO_DROPS);
             if (!do_drops) {
                 cir.cancel();
             }
         }
     }
+
+    @Inject(at = @At("HEAD"), method = "afterBreak", cancellable = true)
+    public void avafterBreakMixin(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack, CallbackInfo cir) {
+        if (state.contains(AVProperties.DO_DROPS)) {
+            if (!state.get(AVProperties.DO_DROPS)) {
+                player.incrementStat(Stats.MINED.getOrCreateStat(this.asBlock()));
+                player.addExhaustion(0.005F);
+                cir.cancel();
+            }
+        }
+    }
+
+    /*@Inject(at = @At("HEAD"), method = "replace", cancellable = true)
+    private static void avreplaceMixin(BlockState state, BlockState newState, WorldAccess world, BlockPos pos, int flags, CallbackInfo cir) {
+        int maxUpdateDepth = 512;
+        if (newState != state) {
+            if (state.getBlock() == Blocks.SCAFFOLDING) {
+                if (newState.isAir()) {
+                    if (!world.isClient()) {
+                        boolean defaultShouldDrop = (flags & 32) == 0;
+                        boolean do_drops = state.get(AVProperties.DO_DROPS);
+                        world.breakBlock(pos, false, (Entity) null, maxUpdateDepth);
+                    }
+                } else {
+                    world.setBlockState(pos, newState, flags & -33, maxUpdateDepth);
+                }
+                cir.cancel();
+            }
+        }
+    }*/
 
     /*@Inject(at = @At("RETURN"), method = "appendProperties")
     public void avappendPropertiesMixin(StateManager.Builder<Block, BlockState> builder, CallbackInfo cir) {

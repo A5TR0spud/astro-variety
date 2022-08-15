@@ -38,7 +38,7 @@ public abstract class AVLivingEntityMixin extends Entity {
     private static final UUID DECAY_STRENGTH_ID = UUID.fromString("3bce0b01-fdaf-4cb8-a725-7540db55c34c");
     private static final UUID ROSE_GOLD_SPEED_ID = UUID.fromString("1fd7c69e-1686-4b16-b85f-220495594263");
     private static final UUID ROSE_GOLD_ATTACK_ID = UUID.fromString("12ce7946-891d-4678-b003-414d77a1a459");
-
+    private static int tick = 0;
     private static boolean HAS_DECAY = false;
 
 
@@ -161,8 +161,13 @@ public abstract class AVLivingEntityMixin extends Entity {
                 att = entity.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_SPEED);
                 if (att != null) {
                     double rose_gold_attack = 0;
-                    if (AVUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 3, 2, true, true)){
+                    if (AVUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 3, 1, true, false)){
                         rose_gold_attack = 0.25;
+                        if (tick > 50) {
+                            tick = 0;
+                            AVUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 3, 1, true, true);
+                        }
+                        tick++;
                     }
                     EntityAttributeModifier mod = new EntityAttributeModifier(ROSE_GOLD_ATTACK_ID, "ASTROVarietyRoseGoldAttack",
                             rose_gold_attack, EntityAttributeModifier.Operation.MULTIPLY_BASE);

@@ -124,6 +124,8 @@ public class AVItems {
             new BottomlessBucketItem(Fluids.LAVA, new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
     public static final Item SCAFFOLD_WRENCH = registerItem("scaffold_wrench",
             new ScaffoldWrenchItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
+    public static final Item SCAFFOLD_BREAKER = registerItem("scaffold_breaker",
+            new ScaffoldBreakerItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
 
     //unique
     public static final Item DYNAMITE = registerItem("dynamite",
