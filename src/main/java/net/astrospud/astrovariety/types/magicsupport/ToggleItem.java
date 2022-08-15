@@ -47,6 +47,11 @@ public class ToggleItem extends Item {
         }
     }
 
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return false;
+    }
+
     public void toggle() {
         toggle = !toggle;
     }

@@ -7,16 +7,22 @@ import net.astrospud.astrovariety.registry.AVProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ScaffoldingBlock;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,21 +48,23 @@ public abstract class ScaffoldingBlockMixin extends Block {
         builder.add(new Property[]{DO_DROPS});
     }
 
+    @Inject(at = @At("HEAD"), method = "getOutlineShape", cancellable = true)
+    public void avgetOutlineShapeMixin(BlockState state, BlockView world, BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {
+        if (context.isHolding(AVItems.SCAFFOLD_WRENCH)) {
+            cir.setReturnValue(VoxelShapes.fullCube());
+        }
+    }
 
-
+    @Inject(at = @At("HEAD"), method = "canReplace", cancellable = true)
+    public void avcanReplaceMixin(BlockState state, ItemPlacementContext context, CallbackInfoReturnable<Boolean> cir) {
+        if (context.getStack().isOf(AVItems.SCAFFOLD_WRENCH)) {
+            cir.setReturnValue(true);
+        }
+    }
 
     static {
         DO_DROPS = AVProperties.DO_DROPS;
     }
-
-    /*@Overwrite
-    public final Identifier getLootTableId() {
-        boolean bool = !getDoDrops();
-        if (bool) {
-            return null;
-        }
-        return super.getLootTableId();
-    }*/
 
     public boolean getDoDrops() {
         return (Boolean)state.get(DO_DROPS);

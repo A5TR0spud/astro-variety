@@ -4,11 +4,13 @@ import net.astrospud.astrovariety.AstroVariety;
 import net.astrospud.astrovariety.types.theoriginals.*;
 import net.astrospud.astrovariety.types.magicsupport.*;
 import net.astrospud.astrovariety.types.endless_things.*;
-import net.astrospud.astrovariety.types.unique.CorruptorItem;
+import net.astrospud.astrovariety.types.unique.CorrupterItem;
 import net.astrospud.astrovariety.types.unique.DynamiteItem;
 import net.astrospud.astrovariety.types.unique.SlowballItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ScaffoldingBlock;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
@@ -128,6 +130,8 @@ public class AVItems {
             new DynamiteItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(64), AVEntities.DYNAMITE));
     public static final Item SLOW_BALL = registerItem("slow_ball",
             new SlowballItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(64), AVEntities.SLOW_BALL));
+    public static final Item CORRUPTER = registerItem("corrupter",
+            new CorrupterItem(new FabricItemSettings().group(ItemGroup.DECORATIONS).maxCount(1)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(AstroVariety.MOD_ID, name), item);
