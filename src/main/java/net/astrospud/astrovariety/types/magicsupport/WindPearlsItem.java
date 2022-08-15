@@ -74,7 +74,7 @@ public class WindPearlsItem extends ToggleItem {
                         world.addParticle(particle, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
                     }*/
 
-                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 25, 64, false, false, true));
+                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 5, 64, false, false, true));
                 }
             }
         }
