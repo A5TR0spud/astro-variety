@@ -2,6 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
+      "item": "astrovariety:alchemy_catalyst"
+    },
+    {
       "item": "minecraft:sculk_catalyst"
     },
     {

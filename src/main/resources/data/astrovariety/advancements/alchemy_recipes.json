@@ -66,6 +66,12 @@
         "recipe": "astrovariety:scaffold_wrench"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_recipe10": {
+      "conditions": {
+        "recipe": "astrovariety:corrupter"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
@@ -79,7 +85,8 @@
       "has_the_recipe6",
       "has_the_recipe7",
       "has_the_recipe8",
-      "has_the_recipe9"
+      "has_the_recipe9",
+      "has_the_recipe10"
     ]
   ],
   "rewards": {
@@ -92,7 +99,8 @@
       "astrovariety:dwarven_pickaxe",
       "astrovariety:wind_pearls",
       "astrovariety:nanomachine",
-      "astrovariety:scaffold_wrench"
+      "astrovariety:scaffold_wrench",
+      "astrovariety:corrupter"
     ]
   }
 }
