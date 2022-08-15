@@ -3,6 +3,7 @@ package net.astrospud.astrovariety.mixin;
 import net.astrospud.astrovariety.AstroVariety;
 import net.astrospud.astrovariety.registry.AVItems;
 import net.astrospud.astrovariety.registry.AVProperties;
+import net.astrospud.astrovariety.types.endless_things.ScaffoldBreakerItem;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -37,33 +38,20 @@ import java.util.function.Supplier;
 
 @Mixin(Block.class)
 public abstract class BlockMixin extends AbstractBlock{
-    //private static BooleanProperty DO_DROPS = null;
-
     public BlockMixin(Settings settings) {
         super(settings);
-        //this.setDefaultState((BlockState) ((BlockState) ((BlockState) ((BlockState) stateManager.getDefaultState()).with(DO_DROPS, true))));
     }
-
-    /*@Inject(at = @At("HEAD"), method = "getDroppedStacks", cancellable = true)
-    private static void avgetDroppedStacks(BlockState state, ServerWorld world, BlockPos pos, @Nullable BlockEntity blockEntity, CallbackInfoReturnable<List<ItemStack>> cir) {
-        //LootContext.Builder builder = (new LootContext.Builder(world)).random(world.random).parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos)).parameter(LootContextParameters.TOOL, ItemStack.EMPTY).optionalParameter(LootContextParameters.BLOCK_ENTITY, blockEntity);
-        //return state.getDroppedStacks(builder);
-        //if (!state.get(AVProperties.DO_DROPS)) {
-            cir.setReturnValue(null);
-        //}
-    }*/
 
     @Inject(at = @At("HEAD"), method = "dropStack", cancellable = true)
     private static void avdropStack(World world, BlockPos pos, ItemStack stack, CallbackInfo cir) {
         BlockState state = world.getBlockState(pos);
-        state.updateNeighbors(world, pos, 6);
         AstroVariety.LOGGER.info(String.valueOf(state));
         boolean contains = (Boolean)state.contains(AVProperties.DO_DROPS);
 
         if (contains || state.getBlock() == Blocks.SCAFFOLDING) {
-            state = world.getBlockState(pos);
             boolean do_drops = (Boolean)state.get(AVProperties.DO_DROPS);
             if (!do_drops) {
+                state.updateNeighbors(world, pos, 6);
                 cir.cancel();
             }
         }
@@ -79,32 +67,4 @@ public abstract class BlockMixin extends AbstractBlock{
             }
         }
     }
-
-    /*@Inject(at = @At("HEAD"), method = "replace", cancellable = true)
-    private static void avreplaceMixin(BlockState state, BlockState newState, WorldAccess world, BlockPos pos, int flags, CallbackInfo cir) {
-        int maxUpdateDepth = 512;
-        if (newState != state) {
-            if (state.getBlock() == Blocks.SCAFFOLDING) {
-                if (newState.isAir()) {
-                    if (!world.isClient()) {
-                        boolean defaultShouldDrop = (flags & 32) == 0;
-                        boolean do_drops = state.get(AVProperties.DO_DROPS);
-                        world.breakBlock(pos, false, (Entity) null, maxUpdateDepth);
-                    }
-                } else {
-                    world.setBlockState(pos, newState, flags & -33, maxUpdateDepth);
-                }
-                cir.cancel();
-            }
-        }
-    }*/
-
-    /*@Inject(at = @At("RETURN"), method = "appendProperties")
-    public void avappendPropertiesMixin(StateManager.Builder<Block, BlockState> builder, CallbackInfo cir) {
-        builder.add(new Property[]{DO_DROPS});
-    }
-
-    static {
-        DO_DROPS = AVProperties.DO_DROPS;
-    }*/
 }
