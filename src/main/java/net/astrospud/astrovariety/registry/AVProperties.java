@@ -5,8 +5,6 @@ import net.minecraft.state.property.BooleanProperty;
 
 public class AVProperties {
     public static final BooleanProperty DO_DROPS = BooleanProperty.of("do_drops");
-    public static final BooleanProperty NOT_FLAGGED = BooleanProperty.of("not_flagged");
-
     public static void registerModProperies() {
         AstroVariety.LOGGER.info("Registering Mod Properties for " + AstroVariety.MOD_ID);
     }

@@ -68,4 +68,11 @@ public class AVScaffoldRemoveMatrix {
         worldList = new ArrayList<>();
         valid = false;
     }
+
+    boolean containsPos(BlockPos pos) {
+        if (canDoNext()) {
+            return posList.contains(pos);
+        }
+        return false;
+    }
 }

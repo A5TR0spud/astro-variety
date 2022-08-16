@@ -23,18 +23,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ScaffoldingBlock.class)
 public abstract class ScaffoldingBlockMixin extends Block {
     private static BooleanProperty DO_DROPS;
-    private static BooleanProperty FLAGGED_FOR_SCAFFOLD_BREAK;
     private static BlockState state = null;
 
     public ScaffoldingBlockMixin(Settings settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(AVProperties.DO_DROPS, true).with(AVProperties.NOT_FLAGGED, true));
+        this.setDefaultState(this.stateManager.getDefaultState().with(AVProperties.DO_DROPS, true));
         state = this.getDefaultState();
     }
 
     @Inject(at = @At("RETURN"), method = "appendProperties")
     public void avappendPropertiesMixin(StateManager.Builder<Block, BlockState> builder, CallbackInfo cir) {
-        builder.add(new Property[]{DO_DROPS, FLAGGED_FOR_SCAFFOLD_BREAK});
+        builder.add(new Property[]{DO_DROPS});
     }
 
     @Inject(at = @At("HEAD"), method = "getOutlineShape", cancellable = true)
@@ -53,6 +52,5 @@ public abstract class ScaffoldingBlockMixin extends Block {
 
     static {
         DO_DROPS = AVProperties.DO_DROPS;
-        FLAGGED_FOR_SCAFFOLD_BREAK = AVProperties.NOT_FLAGGED;
     }
 }

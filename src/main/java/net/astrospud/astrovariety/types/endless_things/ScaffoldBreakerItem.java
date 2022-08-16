@@ -16,6 +16,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,19 +54,9 @@ public class ScaffoldBreakerItem extends Item {
 
     public void removeScaffold(BlockState state, BlockPos pos, World world) {
         Block block = state.getBlock();
-
         if (block == Blocks.SCAFFOLDING) {
-            if (state.get(AVProperties.NOT_FLAGGED)) {
+            if (!data.containsPos(pos)) {
                 data.add(state, pos, world);
-                world.setBlockState(pos, state.with(AVProperties.NOT_FLAGGED, false));
-                removeScaffold(pos.up(), world);
-                removeScaffold(pos.down(), world);
-
-                removeScaffold(pos.east(), world);
-                removeScaffold(pos.west(), world);
-
-                removeScaffold(pos.north(), world);
-                removeScaffold(pos.south(), world);
             }
         }
     }
@@ -88,10 +79,20 @@ public class ScaffoldBreakerItem extends Item {
             FluidState fluid = world.getFluidState(pos);
             if (state.getBlock() == Blocks.SCAFFOLDING) {
                 if (state.get(AVProperties.DO_DROPS)) {
-                    world.breakBlock(pos, true, null);
+                    world.breakBlock(pos, world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS), null);
                 } else {
                     world.setBlockState(pos, fluid.getBlockState());
                 }
+
+                removeScaffold(pos.up(), world);
+                removeScaffold(pos.up().up(), world);
+                removeScaffold(pos.down(), world);
+
+                removeScaffold(pos.east(), world);
+                removeScaffold(pos.west(), world);
+
+                removeScaffold(pos.north(), world);
+                removeScaffold(pos.south(), world);
             }
         }
     }

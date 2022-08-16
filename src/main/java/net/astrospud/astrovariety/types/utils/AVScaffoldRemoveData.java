@@ -28,4 +28,8 @@ public class AVScaffoldRemoveData {
     public void clearData() {
         matrix.clearData();
     }
+
+    public boolean containsPos(BlockPos pos) {
+        return matrix.containsPos(pos);
+    }
 }
