@@ -57,7 +57,15 @@ public class ScaffoldBreakerItem extends Item {
         if (block == Blocks.SCAFFOLDING) {
             if (state.get(AVProperties.NOT_FLAGGED)) {
                 data.add(state, pos, world);
-                world.setBlockState(pos, world.getBlockState(pos).with(AVProperties.NOT_FLAGGED, false));
+                world.setBlockState(pos, state.with(AVProperties.NOT_FLAGGED, false));
+                removeScaffold(pos.up(), world);
+                removeScaffold(pos.down(), world);
+
+                removeScaffold(pos.east(), world);
+                removeScaffold(pos.west(), world);
+
+                removeScaffold(pos.north(), world);
+                removeScaffold(pos.south(), world);
             }
         }
     }
@@ -84,14 +92,6 @@ public class ScaffoldBreakerItem extends Item {
                 } else {
                     world.setBlockState(pos, fluid.getBlockState());
                 }
-                removeScaffold(pos.up(), world);
-                removeScaffold(pos.down(), world);
-
-                removeScaffold(pos.east(), world);
-                removeScaffold(pos.west(), world);
-
-                removeScaffold(pos.north(), world);
-                removeScaffold(pos.south(), world);
             }
         }
     }
