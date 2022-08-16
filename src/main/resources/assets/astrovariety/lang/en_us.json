@@ -33,6 +33,7 @@
   "item.astrovariety.bottomless_lava_bucket": "Bottomless Lava Bucket",
   "item.astrovariety.scaffold_wrench": "Scaffold Wrench",
   "item.astrovariety.scaffold_breaker": "Scaffold Breaker",
+  "tooltip.astrovariety.scaffold_breaker": "Right click to clear data",
 
   "item.astrovariety.dynamite": "Stick of TNT",
   "entity.astrovariety.dynamite": "Stick of TNT",
