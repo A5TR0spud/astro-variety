@@ -46,11 +46,11 @@ public class ScaffoldBreakerItem extends Item {
         return super.use(world, user, hand);
     }*/
 
-    @Override
+    /*@Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(Text.translatable("tooltip.astrovariety.scaffold_breaker").formatted(Formatting.GRAY));
-    }
+    }*/
 
     public void removeScaffold(BlockState state, BlockPos pos, World world) {
         Block block = state.getBlock();
@@ -100,6 +100,7 @@ public class ScaffoldBreakerItem extends Item {
                     world.breakBlock(pos, world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS), null);
                 } else {
                     world.setBlockState(pos, fluid.getBlockState());
+                    world.updateNeighbors(pos, state.getBlock());
                 }
 
                 removeScaffold(pos.down(), world);
