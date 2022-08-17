@@ -9,5 +9,17 @@ import net.minecraft.util.registry.Registry;
 public class AVScreenHandlers {
     public static ScreenHandlerType<AlchemistTableScreenHandler> ALCHEMIST_TABLE_SCREEN_HANDLER =
             Registry.register(Registry.SCREEN_HANDLER, new Identifier(AstroVariety.MOD_ID, "alchemist_table"),
-                    AlchemistTableScreenHandler::new);
+                    new ScreenHandlerType<>(AlchemistTableScreenHandler::new)
+            );
+
+    public static void registerScreenHandlers() {
+        AstroVariety.LOGGER.info(
+                """
+                 
+                 o
+                /|\\
+                / \\
+                """
+        );
+    }
 }

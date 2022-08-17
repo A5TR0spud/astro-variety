@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 public class AlchemistTableScreenHandler extends ScreenHandler {
     private final Inventory inventory;
 
-    protected AlchemistTableScreenHandler(int syncId, PlayerInventory playerInventory) {
+    public AlchemistTableScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(4));
     }
 
@@ -26,10 +26,10 @@ public class AlchemistTableScreenHandler extends ScreenHandler {
         inventory.onOpen(playerInventory.player);
 
         //
-        this.addSlot(new AVFuelSlot(inventory, 0, 18, 50));
+        this.addSlot(new Slot(inventory, 0, 18, 50));
         this.addSlot(new Slot(inventory, 1, 66, 16));
         this.addSlot(new Slot(inventory, 2, 66, 50));
-        this.addSlot(new AVResultSlot(inventory, 3, 114, 33));
+        this.addSlot(new Slot(inventory, 3, 114, 33));
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);

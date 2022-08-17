@@ -1,6 +1,7 @@
 package net.astrospud.astrovariety;
 
 import net.astrospud.astrovariety.registry.*;
+import net.astrospud.astrovariety.screen.AVScreenHandlers;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,5 +28,6 @@ public class AstroVariety implements ModInitializer {
 		AVEntities.registerRenderers();
 		AVDispenserBehaviour.registerModDispensorProps();
 		AVBlockEntities.registerAllBlockEntities();
+		AVScreenHandlers.registerScreenHandlers();
 	}
 }
