@@ -1,14 +1,12 @@
 package net.astrospud.astrovariety.registry;
 
 import net.astrospud.astrovariety.AstroVariety;
-import net.astrospud.astrovariety.types.unique.DynamiteEntity;
-import net.astrospud.astrovariety.types.unique.SlowBallEntity;
+import net.astrospud.astrovariety.types.unique.entity.DynamiteEntity;
+import net.astrospud.astrovariety.types.unique.entity.SlowBallEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.fabricmc.fabric.impl.client.rendering.EntityRendererRegistryImpl;
-import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;

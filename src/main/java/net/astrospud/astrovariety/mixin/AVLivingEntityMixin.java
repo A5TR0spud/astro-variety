@@ -2,9 +2,7 @@ package net.astrospud.astrovariety.mixin;
 
 import net.astrospud.astrovariety.registry.AVItems;
 import net.astrospud.astrovariety.registry.AVStatusEffects;
-import net.astrospud.astrovariety.types.endless_things.ScaffoldBreakerItem;
-import net.astrospud.astrovariety.util.AVUtil;
-import net.minecraft.block.Blocks;
+import net.astrospud.astrovariety.types.utils.RoseGoldDamageUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +16,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -144,28 +141,28 @@ public abstract class AVLivingEntityMixin extends Entity {
                 EntityAttributeInstance att = entity.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
                 if(att != null) {
                     double rose_gold_speed = 0;
-                    if (AVUtil.boolDamageRoseGold(player, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 1, 1, true, false)){
+                    if (RoseGoldDamageUtil.boolDamageRoseGold(player, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 1, 1, true, false)){
                         rose_gold_speed+=1;
                     }
                     EntityAttributeModifier mod = new EntityAttributeModifier(ROSE_GOLD_SPEED_ID, "ASTROVarietyRoseGoldSpeed",
                             rose_gold_speed, EntityAttributeModifier.Operation.MULTIPLY_BASE);
                     ReplaceAttributeModifier(att, mod);
                 }
-                if (AVUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 1, 2, true, false)
+                if (RoseGoldDamageUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 1, 2, true, false)
                         && !entity.hasStatusEffect(StatusEffects.ABSORPTION)) {
                     entity.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 150, 0, true, false, true));
                     entity.heal(1);
-                    AVUtil.damageRoseGoldStack(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 1, 2);
+                    RoseGoldDamageUtil.damageRoseGoldStack(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 1, 2);
                 }
 
                 att = entity.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_SPEED);
                 if (att != null) {
                     double rose_gold_attack = 0;
-                    if (AVUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 3, 1, true, false)){
+                    if (RoseGoldDamageUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 3, 1, true, false)){
                         rose_gold_attack = 0.25;
                         if (tick > 50) {
                             tick = 0;
-                            AVUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 3, 1, true, true);
+                            RoseGoldDamageUtil.boolDamageRoseGold(player, armor.get(2), AVItems.ROSE_GOLD_CHESTPLATE, 3, 1, true, true);
                         }
                         tick++;
                     }
@@ -174,7 +171,7 @@ public abstract class AVLivingEntityMixin extends Entity {
                     ReplaceAttributeModifier(att, mod);
                 }
 
-                if (AVUtil.boolDamageRoseGold(player, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 3, 1, true, false)){
+                if (RoseGoldDamageUtil.boolDamageRoseGold(player, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 3, 1, true, false)){
                     player.stepHeight = 1.5f;
                 }
                 else {
@@ -243,7 +240,7 @@ public abstract class AVLivingEntityMixin extends Entity {
             Iterable<ItemStack> armorItems = entity.getArmorItems();
             ArrayList<ItemStack> armor = new ArrayList<>();
             armorItems.forEach(armor::add);
-            if (AVUtil.boolDamageRoseGold(entity, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 2, 3, true, true)){
+            if (RoseGoldDamageUtil.boolDamageRoseGold(entity, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 2, 3, true, true)){
                 info.setReturnValue(info.getReturnValueF()*1.5f);
             }
         }
@@ -257,7 +254,7 @@ public abstract class AVLivingEntityMixin extends Entity {
                 Iterable<ItemStack> armorItems = entity.getArmorItems();
                 ArrayList<ItemStack> armor = new ArrayList<>();
                 armorItems.forEach(armor::add);
-                AVUtil.damageRoseGoldStack(entity, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 1, 1);
+                RoseGoldDamageUtil.damageRoseGoldStack(entity, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 1, 1);
             }
             roseGoldLegTick++;
         }
@@ -267,7 +264,7 @@ public abstract class AVLivingEntityMixin extends Entity {
                 Iterable<ItemStack> armorItems = entity.getArmorItems();
                 ArrayList<ItemStack> armor = new ArrayList<>();
                 armorItems.forEach(armor::add);
-                AVUtil.damageRoseGoldStack(entity, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 3, 1);
+                RoseGoldDamageUtil.damageRoseGoldStack(entity, armor.get(1), AVItems.ROSE_GOLD_LEGGINGS, 3, 1);
             }
             roseGoldLegTick++;
         }

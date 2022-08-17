@@ -1,8 +1,8 @@
 package net.astrospud.astrovariety.registry;
 
 import net.astrospud.astrovariety.AstroVariety;
-import net.astrospud.astrovariety.types.magicsupport.BleedingStatusEffect;
-import net.astrospud.astrovariety.types.magicsupport.NanomachinesStatusEffect;
+import net.astrospud.astrovariety.types.magicsupport.effect.BleedingStatusEffect;
+import net.astrospud.astrovariety.types.magicsupport.effect.NanomachinesStatusEffect;
 import net.astrospud.astrovariety.types.utils.AVStatusEffect;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;

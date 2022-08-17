@@ -1,16 +1,13 @@
 package net.astrospud.astrovariety.registry;
 
 import net.astrospud.astrovariety.AstroVariety;
-import net.astrospud.astrovariety.types.theoriginals.*;
-import net.astrospud.astrovariety.types.magicsupport.*;
-import net.astrospud.astrovariety.types.endless_things.*;
-import net.astrospud.astrovariety.types.unique.CorrupterItem;
-import net.astrospud.astrovariety.types.unique.DynamiteItem;
-import net.astrospud.astrovariety.types.unique.SlowballItem;
+import net.astrospud.astrovariety.types.endless_things.item.*;
+import net.astrospud.astrovariety.types.magicsupport.item.*;
+import net.astrospud.astrovariety.types.theoriginals.item.*;
+import net.astrospud.astrovariety.types.unique.item.CorrupterItem;
+import net.astrospud.astrovariety.types.unique.item.DynamiteItem;
+import net.astrospud.astrovariety.types.unique.item.SlowballItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ScaffoldingBlock;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
