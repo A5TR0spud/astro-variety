@@ -3,7 +3,6 @@ package net.astrospud.astrovariety.types.magicsupport.item;
 import net.astrospud.astrovariety.registry.AVStatusEffects;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
@@ -16,26 +15,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class NanomachineItem extends ToggleItem {
+public class NanomachineItem extends MagicSupportItem {
     public NanomachineItem() {
         super(new FabricItemSettings().group(ItemGroup.TOOLS).fireproof().maxCount(1).rarity(Rarity.UNCOMMON));
     }
 
     @Override
-    public void specialTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if (entity instanceof PlayerEntity player && player.getHealth() < player.getMaxHealth()
-        && !player.getItemCooldownManager().isCoolingDown(stack.getItem())
-        && toggle && !player.hasStatusEffect(AVStatusEffects.NANOMACHINES)) {
-            int count = -1;
-            for (int i = 0; i < player.getInventory().size(); i++) {
-                if (player.getInventory().getStack(i).getItem() == stack.getItem()) {
-                    count ++;
-                }
-            }
-            if (count < 0) {count = 0;}
+    public void specialTick(ItemStack stack, World world, PlayerEntity player, int slot, boolean selected, int count) {
+        if (player.getHealth() < player.getMaxHealth()
+        && !player.hasStatusEffect(AVStatusEffects.NANOMACHINES)) {
 
             player.getItemCooldownManager().set(stack.getItem(), 20);
-            player.addStatusEffect(new StatusEffectInstance(AVStatusEffects.NANOMACHINES,20, count, false, false, true));
+            player.addStatusEffect(new StatusEffectInstance(AVStatusEffects.NANOMACHINES,20, count-1, false, false, true));
         }
     }
 

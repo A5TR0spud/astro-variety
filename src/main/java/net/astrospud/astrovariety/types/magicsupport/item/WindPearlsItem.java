@@ -23,28 +23,23 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class WindPearlsItem extends ToggleItem {
+public class WindPearlsItem extends MagicSupportItem {
 
     public WindPearlsItem() {
         super(new FabricItemSettings().group(ItemGroup.TOOLS).fireproof().maxCount(1).rarity(Rarity.RARE));
     }
 
     @Override
-    public void specialTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if (entity instanceof PlayerEntity player && toggle
-                && !player.getItemCooldownManager().isCoolingDown(stack.getItem())) {
+    public void specialTick(ItemStack stack, World world, PlayerEntity player, int slot, boolean selected, int count) {
+        player.getItemCooldownManager().set(stack.getItem(), 100);
 
-            player.getItemCooldownManager().set(stack.getItem(), 100);
+        player.addStatusEffect(new StatusEffectInstance(AVStatusEffects.WIND_MOBILITTY, 100, count-1, false, false, true));
+    }
 
-            int count = 0;
-            for (int i = 0; i < player.getInventory().size(); i++) {
-                if (player.getInventory().getStack(i).getItem() == stack.getItem()) {
-                    count ++;
-                }
-            }
-            player.addStatusEffect(new StatusEffectInstance(AVStatusEffects.WIND_MOBILITTY, 100, count-1, false, false, true));
-        }
-        if (entity instanceof PlayerEntity player && toggle) {
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        super.inventoryTick(stack, world, entity, slot, selected);
+        if (entity instanceof PlayerEntity player) {
             if (player.fallDistance > player.getSafeFallDistance()*0.90f) {
                 BlockHitResult cast = world.raycast(new RaycastContext(
                         new Vec3d(player.getPos().x, player.getPos().y, player.getPos().z),
@@ -55,7 +50,7 @@ public class WindPearlsItem extends ToggleItem {
                 ));
                 if (cast.getType() == HitResult.Type.BLOCK &&
                         !(Fluids.WATER == world.getFluidState(cast.getBlockPos().up()).getFluid()
-                        || Fluids.FLOWING_WATER == world.getFluidState(cast.getBlockPos().up()).getFluid())) {
+                                || Fluids.FLOWING_WATER == world.getFluidState(cast.getBlockPos().up()).getFluid())) {
                     player.setVelocity(player.getVelocity().x, player.getVelocity().y*0.5, player.getVelocity().z);
                     player.playSound(SoundEvents.BLOCK_WOOL_FALL, 1, 1);
 

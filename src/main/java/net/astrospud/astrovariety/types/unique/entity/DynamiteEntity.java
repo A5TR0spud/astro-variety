@@ -66,7 +66,7 @@ public class DynamiteEntity extends ThrownItemEntity {
     }
 
     public Explosion explode() {
-        float f = 0.75F;
+        float f = 4F / 9F;
         return this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), f, Explosion.DestructionType.BREAK);
     }
 }

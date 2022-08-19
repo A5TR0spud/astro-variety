@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DecayTalismanItem extends Item {
+public class DecayTalismanItem extends MagicSupportItem {
     public DecayTalismanItem() {
         super(new FabricItemSettings().group(ItemGroup.TOOLS).fireproof().maxCount(1));
     }

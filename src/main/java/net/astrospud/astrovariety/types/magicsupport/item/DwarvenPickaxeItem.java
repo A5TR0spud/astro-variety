@@ -2,7 +2,6 @@ package net.astrospud.astrovariety.types.magicsupport.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,19 +15,17 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DwarvenPickaxeItem extends ToggleItem {
+public class DwarvenPickaxeItem extends MagicSupportItem {
     public DwarvenPickaxeItem() {
         super(new FabricItemSettings().group(ItemGroup.TOOLS).fireproof().maxCount(1).rarity(Rarity.RARE));
     }
 
     @Override
-    public void specialTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if (entity instanceof PlayerEntity player && toggle
-            && !player.hasStatusEffect(StatusEffects.HASTE)
-            && !player.getItemCooldownManager().isCoolingDown(stack.getItem())) {
+    public void specialTick(ItemStack stack, World world, PlayerEntity player, int slot, boolean selected, int count) {
+        if (!player.hasStatusEffect(StatusEffects.HASTE)) {
             player.getItemCooldownManager().set(stack.getItem(), 100);
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 200, 0, false, false, true));
-            player.getHungerManager().addExhaustion(0.5f);
+            player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 200, count-1, false, false, true));
+            player.getHungerManager().addExhaustion(((float)count)/2f);
         }
     }
 
