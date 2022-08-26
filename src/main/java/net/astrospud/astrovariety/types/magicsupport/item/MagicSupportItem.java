@@ -14,18 +14,26 @@ public class MagicSupportItem extends Item {
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
-        if (entity instanceof PlayerEntity player
-        && !player.getItemCooldownManager().isCoolingDown(stack.getItem())) {
-            int count = 0;
-            for (int i = 0; i < player.getInventory().size(); i++) {
-                if (player.getInventory().getStack(i).getItem() == stack.getItem()) {
-                    count ++;
+        if (entity instanceof PlayerEntity player) {
+            int count = getCount(stack, player);
+
+            if (!player.getItemCooldownManager().isCoolingDown(stack.getItem())) {
+
+                if (count > 0) {
+                    specialTick(stack, world, player, slot, selected, count);
                 }
             }
-            if (count > 0) {
-                specialTick(stack, world, player, slot, selected, count);
+        }
+    }
+
+    public static int getCount(ItemStack stack, PlayerEntity player) {
+        int count = 0;
+        for (int i = 0; i < player.getInventory().size(); i++) {
+            if (player.getInventory().getStack(i).getItem() == stack.getItem()) {
+                count += player.getInventory().getStack(i).getCount();
             }
         }
+        return count;
     }
 
     @Override

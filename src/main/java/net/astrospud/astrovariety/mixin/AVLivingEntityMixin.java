@@ -1,7 +1,9 @@
 package net.astrospud.astrovariety.mixin;
 
+import net.astrospud.astrovariety.listeners.OnDamageCallback;
 import net.astrospud.astrovariety.registry.AVItems;
 import net.astrospud.astrovariety.registry.AVStatusEffects;
+import net.astrospud.astrovariety.types.magicsupport.item.MagicSupportItem;
 import net.astrospud.astrovariety.types.utils.RoseGoldDamageUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -56,6 +58,13 @@ public abstract class AVLivingEntityMixin extends Entity {
         }
     }
 
+    /*@Inject(at = @At(value = "RETURN"), method = "onAttacking")
+    public void avOnAttackingMixin(Entity target, CallbackInfo cir) {
+        if ((Object) this instanceof PlayerEntity player) {
+            OnDamageCallback.EVENT.invoker().onOrganTick(cc.owner, cc);
+        }
+    }*/
+
     @Inject(at = @At(value = "RETURN"), method = "computeFallDamage", cancellable = true)
     protected void avcomputeFallDamageMixin(float fallDistance, float damageMultiplier, CallbackInfoReturnable<Integer> cir) {
         if ((Object) this instanceof LivingEntity entity) {
@@ -73,6 +82,9 @@ public abstract class AVLivingEntityMixin extends Entity {
             ArrayList<ItemStack> armor = new ArrayList<>();
             armorItems.forEach(armor::add);
 
+            if (entity instanceof PlayerEntity player) {
+                OnDamageCallback.EVENT.invoker().onOrganTick(player, source);
+            }
             //cactus
             if (source.getAttacker() instanceof LivingEntity attacker) {
                 int strength = 0;

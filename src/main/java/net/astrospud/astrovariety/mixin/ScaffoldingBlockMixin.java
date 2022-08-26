@@ -38,7 +38,7 @@ public abstract class ScaffoldingBlockMixin extends Block {
 
     @Inject(at = @At("HEAD"), method = "getOutlineShape", cancellable = true)
     public void avgetOutlineShapeMixin(BlockState state, BlockView world, BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        if (context.isHolding(AVItems.SCAFFOLD_WRENCH) || context.isHolding(AVItems.SCAFFOLD_BREAKER)) {
+        if (context.isHolding(AVItems.SCAFFOLD_WRENCH)/* || context.isHolding(AVItems.SCAFFOLD_BREAKER)*/) {
             cir.setReturnValue(VoxelShapes.fullCube());
         }
     }

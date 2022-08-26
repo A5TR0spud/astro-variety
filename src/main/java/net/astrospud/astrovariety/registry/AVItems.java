@@ -108,6 +108,10 @@ public class AVItems {
             new DwarvenPickaxeItem());
     public static final Item WIND_PEARLS = registerItem("wind_pearls",
             new WindPearlsItem());
+    public static final Item INK_WELL = registerItem("ink_well",
+            new InkWellItem());
+    public static final Item SOLAR_NEXUS = registerItem("solar_nexus",
+            new SolarNexusItem());
 
     public static final Item ULTRA_ABSORBENT_SPONGE = registerItem("ultra_absorbent_sponge",
             new UltraAbsorbentSpongeItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
@@ -121,8 +125,8 @@ public class AVItems {
             new BottomlessBucketItem(Fluids.LAVA, new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
     public static final Item SCAFFOLD_WRENCH = registerItem("scaffold_wrench",
             new ScaffoldWrenchItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
-    public static final Item SCAFFOLD_BREAKER = registerItem("scaffold_breaker",
-            new ScaffoldBreakerItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
+    //public static final Item SCAFFOLD_BREAKER = registerItem("scaffold_breaker",
+    //        new ScaffoldBreakerItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
 
     //unique
     public static final Item DYNAMITE = registerItem("dynamite",
