@@ -65,11 +65,8 @@
 
   "tooltip.astrovariety.right_click": "Right-clickable",
 
-  "tooltip.astrovariety.decay_desc_1": "Decay exists as an",
-  "tooltip.astrovariety.decay_desc_2": "   extant form of life",
-  "tooltip.astrovariety.decay_quote_1": "\"You cannot kill me in",
-  "tooltip.astrovariety.decay_quote_2": "   a way that matters\"",
-
+  "tooltip.astrovariety.decay_desc_1": "Converts damage into",
+  "tooltip.astrovariety.decay_desc_2": "damage over time",
   "tooltip.astrovariety.bleeding_heart_1": "Heals you over time at",
   "tooltip.astrovariety.bleeding_heart_2": "the cost of your strength",
   "tooltip.astrovariety.nanomachine_1": "Heals you over time at",

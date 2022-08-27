@@ -22,7 +22,5 @@ public class DecayTalismanItem extends MagicSupportItem {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(Text.translatable("tooltip.astrovariety.decay_desc_1").formatted(Formatting.GRAY));
         tooltip.add(Text.translatable("tooltip.astrovariety.decay_desc_2").formatted(Formatting.GRAY));
-        tooltip.add(Text.translatable("tooltip.astrovariety.decay_quote_1").formatted(Formatting.GRAY));
-        tooltip.add(Text.translatable("tooltip.astrovariety.decay_quote_2").formatted(Formatting.GRAY));
     }
 }
