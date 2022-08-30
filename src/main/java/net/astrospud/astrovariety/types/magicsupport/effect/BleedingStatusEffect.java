@@ -14,9 +14,9 @@ public class BleedingStatusEffect extends DamageModifierStatusEffect {
         super(category, color, modifier);
     }
 
-    @Override
+    /*@Override
     public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         super.onRemoved(entity, attributes, amplifier);
-        entity.heal(amplifier+1);
-    }
+        entity.heal(1);
+    }*/
 }

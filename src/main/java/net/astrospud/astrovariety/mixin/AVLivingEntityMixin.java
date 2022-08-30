@@ -102,12 +102,6 @@ public abstract class AVLivingEntityMixin extends Entity {
                 cir.setReturnValue(false);
                 cir.cancel();
             }
-
-            //talisman of decay
-            if (entity instanceof PlayerEntity player && Utils.getItemCount(AVItems.TALISMAN_OF_DECAY, player) > 0 && (source.getName() == "wither")) {
-                cir.setReturnValue(false);
-                cir.cancel();
-            }
         }
     }
 

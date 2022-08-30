@@ -8,14 +8,16 @@
     "AVPlayerEntityMixin",
     "BlockMixin",
     "ScaffoldingBlockMixin",
-    "WorldMixin"
+    "WorldMixin",
+    "SculkShriekerWarningManagerMixin"
   ],
   "client": [
     "AVLivingEntityMixin",
     "AVPlayerEntityMixin",
     "BlockMixin",
     "ScaffoldingBlockMixin",
-    "WorldMixin"
+    "WorldMixin",
+    "SculkShriekerWarningManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

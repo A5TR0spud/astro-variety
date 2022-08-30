@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DecayTalismanItem extends MagicSupportItem {
     public DecayTalismanItem() {
-        super(new FabricItemSettings().group(ItemGroup.TOOLS).fireproof().maxCount(1));
+        super(new FabricItemSettings().fireproof().maxCount(1));
     }
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {

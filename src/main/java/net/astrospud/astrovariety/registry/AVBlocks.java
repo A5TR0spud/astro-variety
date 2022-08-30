@@ -19,7 +19,7 @@ public class AVBlocks {
     public static final Block ALCHEMIST_TABLE = registerBlock("alchemist_table",
             new AlchemistTableBlock(AbstractBlock.Settings.of(Material.AGGREGATE)));
     public static final Item ALCHEMIST_TABLE_ITEM = registerBlockItem("alchemist_table",
-            ALCHEMIST_TABLE, new FabricItemSettings().group(ItemGroup.BREWING));
+            ALCHEMIST_TABLE, new FabricItemSettings());
 
     private static Block registerBlock(String name, Block block) {
         return Registry.register(Registry.BLOCK, new Identifier(AstroVariety.MOD_ID, name), block);

@@ -4,12 +4,20 @@ import net.astrospud.astrovariety.listeners.OnDamageCallback;
 import net.astrospud.astrovariety.registry.AVItems;
 import net.astrospud.astrovariety.types.utils.RoseGoldDamageUtil;
 import net.astrospud.astrovariety.types.utils.Utils;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -43,5 +51,13 @@ public abstract class AVPlayerEntityMixin extends LivingEntity{
             }
         }
         cir.setReturnValue(cir.getReturnValue()*f);
+    }
+
+    @Inject(at = @At("HEAD"), method = "eatFood")
+    public void aveatFood(World world, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        if (stack.getItem() == Items.GLOW_BERRIES) {
+            player.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 100, 0, false, true, true));
+        }
     }
 }

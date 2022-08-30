@@ -23,10 +23,11 @@ public class BleedingHeartItem extends MagicSupportItem {
 
     @Override
     public void specialTick(ItemStack stack, World world, PlayerEntity player, int slot, boolean selected, int count) {
-        if (player.getHealth() < player.getMaxHealth()
-        && !player.hasStatusEffect(AVStatusEffects.BLEEDING)) {
-            player.getItemCooldownManager().set(stack.getItem(), 20);
-            player.addStatusEffect(new StatusEffectInstance(AVStatusEffects.BLEEDING,20, count-1, false, false, true));
+        if (player.getHealth() < player.getMaxHealth()) {
+            int cooldown = 20/count;
+            player.getItemCooldownManager().set(stack.getItem(), cooldown);
+            player.addStatusEffect(new StatusEffectInstance(AVStatusEffects.BLEEDING, cooldown+1, count-1, false, false, true));
+            player.heal(1);
         }
     }
 

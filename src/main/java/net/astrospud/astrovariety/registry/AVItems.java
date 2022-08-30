@@ -19,16 +19,16 @@ public class AVItems {
     //rose gold
     public static final Item ROSE_GOLD_HELMET = registerItem("charged_rose_gold_helmet",
             new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.HEAD,
-                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
+                    new FabricItemSettings().maxCount(1)));
     public static final Item ROSE_GOLD_CHESTPLATE = registerItem("charged_rose_gold_chestplate",
             new RoseGoldChestplateArmorItem(
-                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
+                    new FabricItemSettings().maxCount(1)));
     public static final Item ROSE_GOLD_LEGGINGS = registerItem("charged_rose_gold_leggings",
             new RoseGoldLeggingsArmorItem(
-                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
+                    new FabricItemSettings().maxCount(1)));
     public static final Item ROSE_GOLD_BOOTS = registerItem("charged_rose_gold_boots",
             new RoseGoldArmorItem(AVArmorMaterial.CHARGED_ROSE_GOLD, EquipmentSlot.FEET,
-                    new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(1)));
+                    new FabricItemSettings().maxCount(1)));
     public static final Item ROSE_GOLD_INGOT = registerItem("rose_gold_ingot",
             new Item(new FabricItemSettings()));
 
@@ -108,10 +108,10 @@ public class AVItems {
             new DwarvenPickaxeItem());
     public static final Item WIND_PEARLS = registerItem("wind_pearls",
             new WindPearlsItem());
-    public static final Item INK_WELL = registerItem("ink_well",
-            new InkWellItem());
-    public static final Item SOLAR_NEXUS = registerItem("solar_nexus",
-            new SolarNexusItem());
+    //public static final Item INK_WELL = registerItem("ink_well",
+    //        new InkWellItem());
+    //public static final Item SOLAR_NEXUS = registerItem("solar_nexus",
+    //        new SolarNexusItem());
 
     public static final Item ULTRA_ABSORBENT_SPONGE = registerItem("ultra_absorbent_sponge",
             new UltraAbsorbentSpongeItem(new FabricItemSettings().group(ItemGroup.TOOLS).maxCount(1).fireproof()));
@@ -134,7 +134,10 @@ public class AVItems {
     public static final Item SLOW_BALL = registerItem("slow_ball",
             new SlowballItem(new FabricItemSettings().group(ItemGroup.COMBAT).maxCount(64), AVEntities.SLOW_BALL));
     public static final Item CORRUPTER = registerItem("corrupter",
-            new CorrupterItem(new FabricItemSettings().group(ItemGroup.DECORATIONS).maxCount(1)));
+            new CorrupterItem(new FabricItemSettings().maxCount(1)));
+    public static final Item GOLD_BERRIES = registerItem("gold_berries",
+            new Item(new Item.Settings().food(AVFoodComponents.GOLD_BERRIES).group(ItemGroup.FOOD)));
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(AstroVariety.MOD_ID, name), item);
@@ -142,5 +145,6 @@ public class AVItems {
 
     public static void registerModItems() {
         AstroVariety.LOGGER.info("Registering Mod Items for " + AstroVariety.MOD_ID);
+        //FoodComponents.GLOW_BERRIES = (new FoodComponent.Builder()).hunger(2).saturationModifier(0.1F).build();
     }
 }

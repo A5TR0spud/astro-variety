@@ -3,6 +3,7 @@ package net.astrospud.astrovariety.listeners;
 import net.astrospud.astrovariety.registry.AVItems;
 import net.astrospud.astrovariety.registry.AVStatusEffects;
 import net.astrospud.astrovariety.types.magicsupport.item.MagicSupportItem;
+import net.astrospud.astrovariety.types.utils.AVStatusEffect;
 import net.astrospud.astrovariety.types.utils.RoseGoldDamageUtil;
 import net.astrospud.astrovariety.types.utils.Utils;
 import net.minecraft.entity.LivingEntity;
@@ -14,11 +15,19 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.vehicle.CommandBlockMinecartEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtInt;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.text.Text;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import org.checkerframework.checker.units.qual.C;
+
+import java.util.*;
 
 import java.util.ArrayList;
 
@@ -26,10 +35,10 @@ public class OnDamageListeners {
     public static void register(){
         OnDamageCallback.EVENT.register(OnDamageListeners::DamageBleedingHeart);
         OnDamageCallback.EVENT.register(OnDamageListeners::DamageNanoMachines);
-        OnDamageCallback.EVENT.register(OnDamageListeners::DamageInkWell);
-        OnDamageCallback.EVENT.register(OnDamageListeners::DamageDecay);
+        //OnDamageCallback.EVENT.register(OnDamageListeners::DamageInkWell);
         OnDamageCallback.EVENT.register(OnDamageListeners::CactusArmorEffects);
         OnDamageCallback.EVENT.register(OnDamageListeners::RoseGoldEffects);
+        //OnDamageCallback.EVENT.register(OnDamageListeners::DamageDecay);
     }
 
     public static void DamageBleedingHeart(LivingEntity entity, DamageSource source, float amount) {
@@ -56,7 +65,7 @@ public class OnDamageListeners {
         }
     }
 
-    public static void DamageInkWell(LivingEntity entity, DamageSource source, float amount) {
+    /*public static void DamageInkWell(LivingEntity entity, DamageSource source, float amount) {
         if (entity instanceof PlayerEntity player) {
             Item item = AVItems.INK_WELL;
             int count = Utils.getItemCount(item, player);
@@ -72,15 +81,7 @@ public class OnDamageListeners {
                 colman.set(item, 50);
             }
         }
-    }
-
-    public static void DamageDecay(LivingEntity entity, DamageSource source, float amount) {
-        if (entity instanceof PlayerEntity player) {
-            Item item = AVItems.TALISMAN_OF_DECAY;
-            int count = Utils.getItemCount(item, player);
-            //player.writeNbt()
-        }
-    }
+    }*/
 
     private static void CactusArmorEffects(LivingEntity entity, DamageSource source, float amount) {
         Iterable<ItemStack> armorItems = entity.getArmorItems();

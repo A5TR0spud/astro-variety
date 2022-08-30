@@ -27,18 +27,10 @@ public class OnTickListeners {
 
 
     public static void register(){
-        OnTickCallback.EVENT.register(OnTickListeners::TickDecay);
         OnTickCallback.EVENT.register(OnTickListeners::TickWindMobility);
         OnTickCallback.EVENT.register(OnTickListeners::TickArmorEffects);
     }
 
-    public static void TickDecay(LivingEntity entity) {
-        if (entity instanceof PlayerEntity player) {
-            if (Utils.getItemCount(AVItems.TALISMAN_OF_DECAY, player) > 0) {
-                player.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 2, 0, true, false, false));
-            }
-        }
-    }
     public static void TickWindMobility(LivingEntity entity) {
         if (entity.hasStatusEffect(AVStatusEffects.WIND_MOBILITTY)) {
             entity.airStrafingSpeed = entity.getMovementSpeed()/5;

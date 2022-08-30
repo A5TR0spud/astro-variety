@@ -46,6 +46,8 @@
   "item.astrovariety.arrow_gatler": "Arrow Gatler",
   "block.astrovariety.alchemist_table": "Alchemist Table",
 
+  "item.astrovariety.gold_berries": "Gold Berries",
+
   "tooltip.astrovariety.mode.empty": "Mode: Empty",
   "tooltip.astrovariety.mode.speed": "Mode: Speed",
   "tooltip.astrovariety.mode.jump": "Mode: Jumpheight",
@@ -65,8 +67,8 @@
 
   "tooltip.astrovariety.right_click": "Right-clickable",
 
-  "tooltip.astrovariety.decay_desc_1": "Converts damage into",
-  "tooltip.astrovariety.decay_desc_2": "damage over time",
+  "tooltip.astrovariety.decay_desc_1": "Converts damage into DoT",
+  "tooltip.astrovariety.decay_desc_2": "at the cost of your strength",
   "tooltip.astrovariety.bleeding_heart_1": "Heals you over time at",
   "tooltip.astrovariety.bleeding_heart_2": "the cost of your strength",
   "tooltip.astrovariety.nanomachine_1": "Heals you over time at",
@@ -80,5 +82,12 @@
 
   "effect.astrovariety.bleeding": "Growth",
   "effect.astrovariety.nanomachines": "Nano Repair",
-  "effect.astrovariety.wind_mobility": "Wind Mobility"
+  "effect.astrovariety.wind_mobility": "Wind Mobility",
+  "effect.astrovariety.decay": "Fungal Decay",
+
+  "astrovariety.warden_spawn_tracker.warning_level.0": "Warden Warnings: 0/3",
+  "astrovariety.warden_spawn_tracker.warning_level.1": "Warden Warnings: 1/3",
+  "astrovariety.warden_spawn_tracker.warning_level.2": "Warden Warnings: 2/3",
+  "astrovariety.warden_spawn_tracker.warning_level.3": "Warden Warnings: 3/3",
+  "astrovariety.warden_spawn_tracker.warning_level.4": "Warden Warnings: 4/3"
 }
